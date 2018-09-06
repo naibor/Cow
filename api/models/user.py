@@ -55,6 +55,7 @@ class Admin(NormalUser):
         # if he wishes admin .update approved to true
         # when approval == true verification email is sent to verify their email
         # else approved == false
+        pass
 
 
 
