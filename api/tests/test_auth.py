@@ -1,8 +1,9 @@
 import unittest
 import json
 from app.endpoints.auth import SignUp
+from tests import BaseTestCase
 
-class Test_SignUp():
+class Test_SignUp(BaseTestCase):
     """Test user signup"""
 
     def test_signup(self):

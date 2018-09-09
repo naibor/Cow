@@ -1,8 +1,8 @@
 # Signup, Sign In and Logout endpoints
-from app import APP
-from flask_restplus import Resource, Api
+from app import API
+from flask_restplus import Resource
 
-# auth_ns = Api.namespace('auth', description="Authentication/Authorization operations.")
+auth_ns = API.namespace('auth', description="Authentication/Authorization operations.")
 
 class SignUp(Resource):
     """normal user signup resource """

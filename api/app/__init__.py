@@ -27,7 +27,7 @@ def resource_not_found(error):
 
     response_payload = dict(
         message="The requested URL was not found on the server. " + \
-                 "If you entered the URL manually please check your spelling and try again."
+                "If you entered the URL manually please check your spelling and try again."
     )
     return make_response(jsonify(response_payload), 404)
 
@@ -47,5 +47,3 @@ from app.endpoints.auth import auth_ns
 API.add_namespace(auth_ns)
 API.init_app(APP)
 CORS(APP)
-
-
