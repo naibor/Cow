@@ -8,7 +8,7 @@ class Test_SignUp(BaseTestCase):
 
     def test_signup(self):
         """Test a normal user can signup"""
-        signup = self.client.post(
+        signup = self.test_client.post(
             "api/v1/auth/signup",
             data = json.dumps(dict(
                 username = "Naibor",

@@ -1,4 +1,4 @@
-Note from 2018-08-29 16:17:23.601
+# Note from 2018-08-29 16:17:23.601
 
 class NormalUser():
     # user model class
