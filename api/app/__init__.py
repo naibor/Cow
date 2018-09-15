@@ -4,6 +4,7 @@ from flask import Flask, make_response, jsonify, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 
+
 # local import
 from config import app_config
 

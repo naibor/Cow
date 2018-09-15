@@ -1,5 +1,5 @@
 # Note from 2018-08-29 16:17:23.601
-
+from app import db
 class NormalUser():
     # user model class
     def __init__(self, username, email, password, confirm_password):
@@ -23,7 +23,8 @@ class NormalUser():
         # else hash the password
         pass
 # save user # users are saved awaiting approval
-     def save_user(self):
+    def save_user(self):
+        db.create_all()
         # insert into the user table this user(username, email, password)
         # return {"messege":"successfully signed up, awaiting approval. be on the look out for a verification email"}
         pass
@@ -48,7 +49,7 @@ class Admin(NormalUser):
         super().__init__(username, email, password,confirm_password)
         self.admin = True
         self.username = Admin
-        self.password = A123456789a!
+        self.password = "A123456789a!"
 
     def approve_user(self):
         # for every saved user if approved == false
