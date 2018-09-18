@@ -10,8 +10,8 @@ class Normaluser(db.Model):
     username = db.Column(db.String(255))
     email = db.Column(db.String(255))
     password = db.Column(db.String(255))
-    approved = db.Column(db.Bool(False))
-    varified = db.Column(db.Bool(False))
+    approved = db.Column(db.Boolean(False))
+
 
     def __init__(self,username, email, password, approved, varified):
         """initialize"""

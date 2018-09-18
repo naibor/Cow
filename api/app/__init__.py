@@ -12,8 +12,9 @@ from config import app_config
 # initialize sql-alchemy
 db = SQLAlchemy()
 
+
 # Get the instance config to use
-config_name = os.environ.get("APP_CONFIG", "production")
+config_name = os.environ.get("APP_CONFIG", "development")
 APP = Flask(__name__, instance_relative_config=True)
 APP.config.from_object(app_config[config_name])
 
