@@ -1,9 +1,11 @@
 from app import db
+# from werkzeug.security import check_password_hash
+
 
 class Normaluser(db.Model):
     """normal user table"""
 
-    __tablename__ = 'user'
+    __tablename__ = 'users'
 
 
     id = db.Column(db.Integer, primary_key=True)
@@ -20,23 +22,29 @@ class Normaluser(db.Model):
         self.password = password
         self.approved = approved
 
-
-
-    @staticmethod
     # saving the user
     def save(self):
         db.session.add(self)
         db.session.commit()
-        pass
 
     @staticmethod
     # check if user exists
     def existance(email):
-        # db.query.filter_by(email=email).first()
-        # if this is false then that user does not exist
-        pass
+        exist = users.query.filter_by(email=email).all()
 
+    @staticmethod
+    # get all users
+    def approve():
+        users.query.all()
+        users.query.filter_by(approved = False).all()
+        users.approved="True"
+        db.session.commit()
 
+    @staticmethod
+    def correct_credentials(username,password):
+        the_user = users.query.filter_by(username=self.username)
+        the_email = users.query.filter_by(email=self.email)
+        # if the_user or the_email and check_password_hash(password)
 
 
     # object instance of the model everytime its queried
