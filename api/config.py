@@ -6,6 +6,9 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 database_url = os.environ.get('DATABASE_URL', 'postgresql://localhost/')
 database_name = os.environ.get('DATABASE_NAME', 'cow')
 
+# database_url = os.environ.get('DATABASE_URL', 'postgresql://password@localhost:5432/cow')
+
+
 class BaseConfig:
     """Base configuration."""
     # Flask APP configs

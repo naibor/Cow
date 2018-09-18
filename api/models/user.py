@@ -1,5 +1,6 @@
 # Note from 2018-08-29 16:17:23.601
 from app import db
+from passlib.hash import pbkdf2_sha256
 class NormalUser():
     # user model class
     def __init__(self, username, email, password, confirm_password):
@@ -8,26 +9,31 @@ class NormalUser():
         self.password = password
         self.confirm_password = confirm_password
         self.approved = False
-        self.verified = False
-# check if user exists
-    def existance(email):
-        # select from all users in db where email = email given
-        # get the email from db (fetchone())
-        # if this is false then there is more than one user
-        pass
-# check if password and confirm password match
-    def matching_passwords():
-        # check if the password given when signing up is the same as the confirm password
-        # if self.password != self.confirm_password
-        # return {"message":"password and confirm password should be the same"}
-        # else hash the password
-        pass
-# save user # users are saved awaiting approval
+
+
+    # save user # users are saved awaiting approval
     def save_user(self):
-        db.create_all()
-        # insert into the user table this user(username, email, password)
+        # check if user exists
+        # if existance():
+        # return user already exists
+        # if user doesn't exist proceed to
+        # matching_and_hashing()
+        # from models get save method
+        save()
         # return {"messege":"successfully signed up, awaiting approval. be on the look out for a verification email"}
         pass
+
+@static method
+# check if password and confirm password match
+def matching_and_hashing(password,confirm_password):
+    if self.password != self.confirm_password:
+        return {"message":"password and confirm password should be the same"}
+    else:
+        password = pbkdf2_sha256.hash(password)
+        return password
+
+    pass
+
 
 # approved users are able to login >> verified users are able to login
     def logging_in_normal_user():
@@ -52,6 +58,8 @@ class Admin(NormalUser):
         self.password = "A123456789a!"
 
     def approve_user(self):
+        # first get all normal users saved
+        # user.query.all()
         # for every saved user if approved == false
         # if he wishes admin .update approved to true
         # when approval == true verification email is sent to verify their email
