@@ -21,8 +21,7 @@ class NormalUser():
         # then save
         if existance(self.email):
             return "user already exists login instead"
-        elif:
-            self.password != self.confirm_password
+        elif self.password != self.confirm_password:
             return {"message":"password and confirm password should be the same"}
         else:
             self.password = generate_password_hash(self.password,method="sha256")
@@ -39,7 +38,7 @@ class NormalUser():
             correct_credentials(self.username,self.password)
             if the_user or the_email and check_password_hash(password):
                 access_token = jwt.encode("id","SECRET KEY")
-                return {"access_token" : access_token.decode("UTF-8"),,
+                return {"access_token" : access_token.decode("UTF-8"),
                 "message":"successfully logged in"},200
             else:
                 return {"message":"wrong credentials provided, check the username and password"},404

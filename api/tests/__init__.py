@@ -1,5 +1,6 @@
 # Tests setup
 from unittest import TestCase
+from app import db
 
 from app import APP, app_config
 
