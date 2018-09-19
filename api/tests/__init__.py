@@ -13,17 +13,20 @@ class BaseTestCase(TestCase):
         """
         Setting up tests
         """
-        APP.config.from_object(app_config['testing'])
+        self.app = APP.config.from_object(app_config['testing'])
         self.test_client = APP.test_client()
         # create all tables
-        db.create_all()
+        with self.app.app_context():
+            db.create_all()
 
     def tearDown(self):
-        """Tearing down tests
         """
-        # drop all tables
-        db.session.remove()
-        db.drop_all
+        Tearing down tests
+        """
+        with self.app.app_context():
+            # drop all tables
+            db.session.remove()
+            db.drop_all
 
 
 if __name__=="__main__":
