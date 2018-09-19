@@ -14,16 +14,15 @@ class SignUp(Resource):
         if errors:
             return(errors),400
         else:
-            new_user = User(
+            new_user = NormalUser(
                 data["username"],
                 data["email"],
                 data["password"],
                 data["confirmpassword"]
                 )
-            # check existance
-            # check matching passwords
-            # save user
-        pass
+        new_user.save_user()
+
+
 
     def get (self):
         # for the admin to see all signups before approval
