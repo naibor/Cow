@@ -11,6 +11,7 @@ class SignUp(Resource):
     def post (self):
         signup_data = request.get_json()
         data, errors = Userschema.load(signup_data)
+        import pdb; pdb.set_trace()
         if errors:
             return(errors),400
         else:

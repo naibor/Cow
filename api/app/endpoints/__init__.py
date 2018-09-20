@@ -1,5 +1,3 @@
-from app.endpoints.auth import SignUp
-from app import API
 # api/v1/auth/signup POST
 # api/v1/auth/login POST
 # api/v1/cow POST
@@ -12,4 +10,5 @@ from app import API
 # api/v1/cow/milk GET
 # api/v1/cow/milk PUT
 
-API.add_resource(SignUp,'/api/v1/auth/signup')
+# API.add_resource(SignUp,'/api/v1/auth/signup')
+

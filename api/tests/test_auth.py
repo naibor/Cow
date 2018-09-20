@@ -18,6 +18,7 @@ class Test_SignUp(BaseTestCase):
                 )),
             headers = {"content-type":"application/json"}
             )
+        import pdb; pdb.set_trace()
         self.assertEqual(signup.status_code,200)
 
 
