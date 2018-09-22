@@ -3,6 +3,7 @@ from app import db
 import jwt
 import os
 from werkzeug.security import generate_password_hash,check_password_hash
+from models.model import NormalUserModel, existance
 class NormalUser():
     # user model class
     def __init__(self, username, email, password, confirm_password):
@@ -25,7 +26,7 @@ class NormalUser():
             return {"message":"password and confirm password should be the same"}
         else:
             self.password = generate_password_hash(self.password,method="sha256")
-            save()
+            NormalUserModel.save(self)
         return {"messege":"successfully signed up, awaiting approval. be on the look out for a verification email"}
 
 

@@ -3,12 +3,8 @@ import os
 from flask import Flask, make_response, jsonify, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-# from app.endpoints.auth import SignUp
-
-
 # local import
 from config import app_config
-
 
 # initialize sql-alchemy
 db = SQLAlchemy()
@@ -50,7 +46,7 @@ from app.endpoints.auth import auth_ns, SignUp
 API.add_namespace(auth_ns)
 API.init_app(APP)
 CORS(APP)
-API.add_resource(SignUp,'/api/v1/auth/signup')
+# API.add_resource(SignUp,'api/v1/auth/signup')
 
 
 

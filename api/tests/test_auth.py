@@ -9,7 +9,7 @@ class Test_SignUp(BaseTestCase):
     def test_signup(self):
         """Test a normal user can signup"""
         signup = self.test_client.post(
-            "api/v1/auth/signup",
+            "/api/v1/auth/signup",
             data = json.dumps(dict(
                 username = "Naibor",
                 email = "hello@gmail.com",
@@ -18,7 +18,7 @@ class Test_SignUp(BaseTestCase):
                 )),
             headers = {"content-type":"application/json"}
             )
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         self.assertEqual(signup.status_code,200)
 
 

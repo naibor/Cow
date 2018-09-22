@@ -1,17 +1,18 @@
 # Signup, Sign In and Logout endpoints
 from app import API
+from flask import request
 from flask_restplus import Resource
 from models.schema import Userschema
 from models.user import NormalUser
 
 auth_ns = API.namespace('auth', description="Authentication/Authorization operations.")
 
+@auth_ns.route('/signup')
 class SignUp(Resource):
     """normal user signup resource """
     def post (self):
         signup_data = request.get_json()
         data, errors = Userschema.load(signup_data)
-        import pdb; pdb.set_trace()
         if errors:
             return(errors),400
         else:
@@ -19,8 +20,10 @@ class SignUp(Resource):
                 data["username"],
                 data["email"],
                 data["password"],
-                data["confirmpassword"]
+                data["confirm_password"]
                 )
+        import pdb; pdb.set_trace()
+
         new_user.save_user()
 
 

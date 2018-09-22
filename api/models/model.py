@@ -2,7 +2,7 @@ from app import db
 # from werkzeug.security import check_password_hash
 
 
-class Normaluser(db.Model):
+class NormalUserModel(db.Model):
     """normal user table"""
 
     __tablename__ = 'users'
@@ -27,10 +27,10 @@ class Normaluser(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    @staticmethod
-    # check if user exists
-    def existance(email):
-        exist = users.query.filter_by(email=email).all()
+    # @staticmethod
+    # # check if user exists
+    # def existance(email):
+    #     exist = users.query.filter_by(email=email).all()
 
     @staticmethod
     # get all users
@@ -54,3 +54,7 @@ class Normaluser(db.Model):
     #     return "<User(username='%s', email='%s', password='%s', approved+'%s', verified='%s')>" %(
     #             self.username, self.email, self.password, self.approved, self.verified
     #         )
+
+# check if user exists
+def existance(email):
+    exist = NormalUserModel.query.filter_by(email=email).all()

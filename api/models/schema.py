@@ -7,7 +7,7 @@ def validate_username(username):
     username_re = re.fullmatch(re.compile(r"^\w+$"),username)
     if not username_re:
         raise ValidationError("Please enter a username")
-    elif len(username) > 3:
+    elif len(username) < 3:
         raise ValidationError("The username entered is too short")
 
 def validate_email(email):
@@ -15,9 +15,10 @@ def validate_email(email):
     if not email:
         raise ValidationError("Please provide an email address")
     email_re = re.compile(r"(^[.A-Za-z0-9_+-]+@[A-Za-z]+\.[.A-Za-z-]+$)")
-    the_email = re.fullmatch(email_re, email)
-    if not the_email:
-        raise ValidationError("Invalid email format")
+    if not re.fullmatch(email_re, email):
+            raise ValidationError("Invalid email format")
+    elif len(email) < 7:
+        raise ValidationError("The email is too short")
 
 def validate_password(password):
     """validate user password"""
@@ -40,6 +41,7 @@ class Userschema(Schema):
     username = fields.Str(validate=validate_username, required=True)
     email = fields.Str(validate=validate_email, required=True)
     password = fields.Str(validate=validate_password, required=True)
+    confirm_password = fields.Str(required=True)
 Userschema = Userschema()
 
 
