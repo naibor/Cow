@@ -21,4 +21,13 @@ class Test_SignUp(BaseTestCase):
         # import pdb; pdb.set_trace()
         self.assertEqual(signup.status_code,200)
 
-
+    def test_user_login(self):
+        """test a user can login"""
+        login = self.test_client.post(
+            "/api/v1/auth/login",
+            data = json.dumps(dict(
+                username = "Naibor",
+                password = "A123456789a!")),
+            headers = {"content-type":"application/json"}
+            )
+        self.assertEqual(login.status_code,200)

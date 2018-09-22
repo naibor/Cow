@@ -12,7 +12,7 @@ class NormalUser():
         self.password = password
         self.confirm_password = confirm_password
         self.approved = False
-
+        # approved users have privilages over non approved users
 
     # save user # users are saved awaiting approval
     def save_user(self):
@@ -33,9 +33,9 @@ class NormalUser():
 
         return {"messege":"successfully signed up "}
 
-# approved users are able to login >> verified users are able to login
+
+
     def logging_in_normal_user(self):
-        if self.approved ==True:
             correct_credentials(self.username,self.password)
             if the_user or the_email and check_password_hash(password):
                 access_token = jwt.encode("id","SECRET KEY")

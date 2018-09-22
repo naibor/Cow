@@ -35,3 +35,7 @@ class SignUp(Resource):
     def get (self,id):
         # view one sign up
         pass
+@auth_ns.route('/login')
+class LogIn(Resource):
+    """A user can login"""
+    pass
