@@ -22,7 +22,7 @@ class SignUp(Resource):
                 data["password"],
                 data["confirm_password"]
                 )
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
 
         new_user.save_user()
 

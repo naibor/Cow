@@ -26,12 +26,12 @@ class NormalUser():
             return {"message":"password and confirm password should be the same"}
         else:
             self.password = generate_password_hash(self.password,method="sha256")
-            NormalUserModel.save(self)
-        return {"messege":"successfully signed up, awaiting approval. be on the look out for a verification email"}
+            # self.confirm_password __delattr__()
+            new =NormalUserModel(self.username,self.email,self.password,self.approved)
+            NormalUserModel.save(new)
+        # import pdb; pdb.set_trace()
 
-
-
-
+        return {"messege":"successfully signed up "}
 
 # approved users are able to login >> verified users are able to login
     def logging_in_normal_user(self):

@@ -15,7 +15,7 @@ class NormalUserModel(db.Model):
     approved = db.Column(db.Boolean(False))
 
 
-    def __init__(self,username, email, password, approved, varified):
+    def __init__(self,username, email, password, approved):
         """initialize"""
         self.username = username
         self.email = email
