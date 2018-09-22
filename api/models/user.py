@@ -2,8 +2,9 @@
 from app import db
 import jwt
 import os
-from werkzeug.security import generate_password_hash,check_password_hash
-from models.model import NormalUserModel, existance
+from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
+from werkzeug.security import generate_password_hash
+from models.model import NormalUserModel, existance, correct_credentials
 class NormalUser():
     # user model class
     def __init__(self, username, email, password, confirm_password):
@@ -16,33 +17,19 @@ class NormalUser():
 
     # save user # users are saved awaiting approval
     def save_user(self):
-        # check if user exists
-        # check if password and confirm password match
-        # hash password
-        # then save
         if existance(self.email):
-            return "user already exists login instead"
+            # check if user exists
+            return {"message":"user already exists login instead"},400
         elif self.password != self.confirm_password:
-            return {"message":"password and confirm password should be the same"}
+            # check if password and confirm password match
+            return {"message":"password and confirm password should be the same"},400
         else:
+            # hash password
             self.password = generate_password_hash(self.password,method="sha256")
-            # self.confirm_password __delattr__()
             new =NormalUserModel(self.username,self.email,self.password,self.approved)
             NormalUserModel.save(new)
-        # import pdb; pdb.set_trace()
-
-        return {"messege":"successfully signed up "}
-
-
-
-    def logging_in_normal_user(self):
-            correct_credentials(self.username,self.password)
-            if the_user or the_email and check_password_hash(password):
-                access_token = jwt.encode("id","SECRET KEY")
-                return {"access_token" : access_token.decode("UTF-8"),
-                "message":"successfully logged in"},200
-            else:
-                return {"message":"wrong credentials provided, check the username and password"},404
+            # then save
+        return {"messege":"successfully signed up"},201
 
 
 
@@ -55,7 +42,27 @@ class Admin(NormalUser):
 
     def approve_user(self):
         approve()
-        return {message:"successefully approved"}
+        return {"message":"successefully approved"}
+
+
+class LogInUser():
+    """user login model"""
+    def __init__(self,username,password):
+        self.username = username
+        self.password = password
+
+    def logging_in_normal_user(self):
+
+            if correct_credentials(self.username, self.password):
+                # import pdb; pdb.set_trace()
+                access_token = create_access_token(identity=self.username)
+                return {"access_token" :access_token,
+                        "message":"successfully logged in"
+                       },200
+            else:
+                return {"message":"wrong credentials provided, check the username and password"},400
+
+
 
 
 

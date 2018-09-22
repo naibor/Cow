@@ -1,5 +1,5 @@
 from app import db
-# from werkzeug.security import check_password_hash
+from werkzeug.security import check_password_hash
 
 
 class NormalUserModel(db.Model):
@@ -35,16 +35,10 @@ class NormalUserModel(db.Model):
     @staticmethod
     # get all users
     def approve():
-        users.query.all()
-        users.query.filter_by(approved = False).all()
-        users.approved="True"
+        NormalUserModel.query.all()
+        NormalUserModel.query.filter_by(approved = False).all()
+        NormalUserModel.approved="True"
         db.session.commit()
-
-    @staticmethod
-    def correct_credentials(username,password):
-        the_user = users.query.filter_by(username=self.username)
-        the_email = users.query.filter_by(email=self.email)
-        # if the_user or the_email and check_password_hash(password)
 
 
     # object instance of the model everytime its queried
@@ -57,4 +51,18 @@ class NormalUserModel(db.Model):
 
 # check if user exists
 def existance(email):
-    exist = NormalUserModel.query.filter_by(email=email).all()
+    return NormalUserModel.query.filter_by(email=email).all()
+
+
+# check for correctness of credetials
+def correct_credentials(username,password):
+        import pdb; pdb.set_trace()
+        # the_user = NormalUserModel.query.filter_by(username=username, password=password)
+        if username:
+            return NormalUserModel.query.filter_by(username=username)
+        elif email:
+            return NormalUserModel.query.filter_by(email=email)
+        else:
+            return{"message":"username or email does not exist"}
+        stored_password = NormalUserModel.query.filter_by(password=password)
+        check_password_hash(stored_password)
