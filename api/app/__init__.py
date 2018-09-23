@@ -1,7 +1,7 @@
 """Main APP module"""
 import os
 from flask import Flask, make_response, jsonify, redirect
-# from flask_jwt_extended import JWTManager
+from flask_jwt_extended import JWTManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 # local import
@@ -15,7 +15,7 @@ db = SQLAlchemy()
 config_name = os.environ.get("APP_CONFIG", "development")
 APP = Flask(__name__, instance_relative_config=True)
 APP.config.from_object(app_config[config_name])
-# jwt = JWTManager(APP)
+jwt_manager = JWTManager(APP)
 
 # overide 404 error handler
 
