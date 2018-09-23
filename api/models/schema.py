@@ -46,7 +46,8 @@ Userschema = Userschema()
 
 class LoginUser(Schema):
     """user login detail schema"""
-    username = fields.Str(required=True)
+    username = fields.Str(required=False)
+    email = fields.Str(required=False)
     password = fields.Str(required=True)
 Loginschema = LoginUser()
 

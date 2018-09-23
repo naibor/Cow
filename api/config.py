@@ -28,6 +28,7 @@ class DevelopmentConfig(BaseConfig):
     """Development configuration."""
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = database_url + database_name
+    ENV = "development"
 
 
 class TestingConfig(BaseConfig):
@@ -36,6 +37,7 @@ class TestingConfig(BaseConfig):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = database_url + 'test_'+ database_name
     PRESERVE_CONTEXT_ON_EXCEPTION = False
+    ENV = "testing"
 
 
 class ProductionConfig(BaseConfig):
