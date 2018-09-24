@@ -43,12 +43,13 @@ db.init_app(APP)
 
 # Import and add namespaces for the endpoints
 from restplus import API
-from app.endpoints.auth import auth_ns, SignUp
+from app.endpoints.auth import auth_ns
+from app.endpoints.milking import milk_ns
 
 API.add_namespace(auth_ns)
+API.add_namespace(milk_ns)
 API.init_app(APP)
 CORS(APP)
-# API.add_resource(SignUp,'api/v1/auth/signup')
 
 
 

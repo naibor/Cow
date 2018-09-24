@@ -1,4 +1,6 @@
 # Signup, Sign In and Logout endpoints
+# api/v1/auth/signup POST
+# api/v1/auth/login POST
 from app import API
 from flask import request
 from flask_restplus import Resource

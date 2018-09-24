@@ -1,9 +1,8 @@
-# Note from 2018-08-29 16:17:23.601
 from app import db
 import os
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 from werkzeug.security import generate_password_hash
-from models.model import NormalUserModel, existance, correct_credentials, approve
+from models.user_model import NormalUserModel, existance, correct_credentials, approve
 class NormalUser():
     # user model class
     def __init__(self, username, email, password, confirm_password):
@@ -77,9 +76,3 @@ class LogInUser(object):
                             "message":"successfully logged in"
                            },200
             return {"message":"wrong credentials provided, check the username and password"},400
-
-
-
-
-
-

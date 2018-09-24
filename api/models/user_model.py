@@ -33,6 +33,7 @@ class NormalUserModel(db.Model):
     def __repr__(self):
         return '<Normaluser {}>'.format(self.username)
 
+
 # check if user exists
 def existance(email):
     return NormalUserModel.query.filter_by(email=email).all()
