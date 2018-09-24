@@ -65,16 +65,13 @@ class LogInUser(object):
     def logging_in_normal_user(self):
 
             if self.username:
-                # import pdb; pdb.set_trace()
                 if correct_credentials(self.password, username=self.username) == True:
-                    # import pdb; pdb.set_trace()
                     access_token = create_access_token(identity=self.username)
                     return {"access_token" :access_token,
                             "message":"successfully logged in"
                            }, 200
             elif self.email:
                 if correct_credentials(self.password, email=self.email) == True:
-                    # import pdb; pdb.set_trace()
                     access_token = create_access_token(identity=self.username)
                     return {"access_token" :access_token,
                             "message":"successfully logged in"

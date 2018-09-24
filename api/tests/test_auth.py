@@ -18,7 +18,6 @@ class Test_SignUp(BaseTestCase):
                 )),
             headers = {"content-type":"application/json"}
             )
-        # import pdb; pdb.set_trace()
         self.assertEqual(signup.status_code,201)
 
     def test_user_login(self):
@@ -41,7 +40,6 @@ class Test_SignUp(BaseTestCase):
                 password = "A123456789a!")),
             headers = {"content-type":"application/json"}
             )
-        # import pdb; pdb.set_trace()
         self.assertEqual(login.status_code,200)
 
 
