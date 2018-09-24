@@ -12,12 +12,4 @@ class MilkingModel():
         MilkingProcessModel.save_entry()
         return {"message":"successfully saved an entry"},201
 
-    @staticmethod
-
-
-
-
-
-
-
-
+    # @staticmethod

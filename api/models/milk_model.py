@@ -1,13 +1,16 @@
 from app import db
 from datetime import datetime, timedelta
+from models.user_model import NormalUserModel
 
 milking_time =datetime.now()
 
-class MilkingProcessModel(db.model):
+class MilkingProcessModel(db.Model):
     """milk entries table"""
     __tablename__ = 'milk'
 
     id = db.Column(db.Integer,primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    users = db.relationship("NormalUserModel", backref=("users"))
     amount = db.Column(db.Integer)
     time = db.Column(db.String(255))
     average = db.Column(db.Integer)
@@ -46,8 +49,8 @@ class MilkingProcessModel(db.model):
 
 
         # object instance of the model everytime its queried
-         def __repr__(self):
-        return '<MilkingProcessModel {}>'.format(self.amount)
+        def __repr__(self):
+            return '<MilkingProcessModel {}>'.format(self.amount)
 
 # average milk production in a day
 def average_milk(amount):
@@ -55,5 +58,4 @@ def average_milk(amount):
     # get all amounts within the last 24 hours
     # get their sum
     # divide by the number of amounts
-
-
+    pass

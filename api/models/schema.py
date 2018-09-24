@@ -54,8 +54,8 @@ Loginschema = LoginUser()
 class Milk(Schema):
     """milk entry details schema"""
     amount = fields.Int(required=True)
-    time = Str(required=True)
-    average = Int(required=False)
+    time = fields.Str(required=True)
+    average = fields.Int(required=False)
 Milkschema = Milk()
 
 
