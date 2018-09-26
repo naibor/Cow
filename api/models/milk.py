@@ -1,11 +1,14 @@
 from app import db
-from models.milk_model import milking_time, MilkingProcessModel
+from datetime import datetime, timedelta
+from models.milk_model import MilkingProcessModel
+
+milking_time =datetime.now()
 
 class MilkingModel():
     """milk entry model"""
     def __init__(self, amount):
         self.amount = amount
-        self.time = milking_time
+        self.time = Str(milking_time.time())
         self.average = average
 
     def save_milk_entry(self):

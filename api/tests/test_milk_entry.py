@@ -15,7 +15,7 @@ class Test_Milk_Entry(BaseTestCase):
             "/api/v1/cow/milk",
             data = json.dumps(dict(
                 amount = "13.66",
-                time = Str(milking_time.time()),
+                time = str(milking_time.time()),
                 average = "average"
                 )),
             headers = {"content-type":"application/json"}

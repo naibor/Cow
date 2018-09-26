@@ -8,10 +8,13 @@ from flask import request
 from flask_restplus import Resource
 from models.milk import MilkingModel
 from models.schema import Milkschema
-milk_ns = API.namespace('milk', description="Authentication/Authorization operations.")
+milk_ns = API.namespace('milk',
+                        description="Milk entry/milk entry operations.",
+                        path='/cow/milk')
 
 @milk_ns.route('/milk')
 class MilkingProcess(Resource):
+    import pdb; pdb.set_trace()
     """milk entries resource"""
     def post(self):
         milk_data = request.get_json()

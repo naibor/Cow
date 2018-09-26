@@ -1,8 +1,6 @@
 from app import db
-from datetime import datetime, timedelta
 from models.user_model import NormalUserModel
 
-milking_time =datetime.now()
 
 class MilkingProcessModel(db.Model):
     """milk entries table"""
@@ -12,13 +10,13 @@ class MilkingProcessModel(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     users = db.relationship("NormalUserModel", backref=("users"))
     amount = db.Column(db.Integer)
-    time = db.Column(db.String(255))
+    time = db.Column(db.DateTime)
     average = db.Column(db.Integer)
 
     def __init__(self, amount, time, average):
         """initilize the db table"""
         self.amount = amount
-        self.time = str(milkingtime.time())
+        self.time = time
         self.average = average
 
         # save a milk entry
