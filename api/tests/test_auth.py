@@ -1,6 +1,7 @@
 import unittest
 import json
 from app.endpoints.auth import SignUp
+from models.user import NormalUser, Admin
 from tests import BaseTestCase
 
 class Test_SignUp(BaseTestCase):
@@ -41,5 +42,18 @@ class Test_SignUp(BaseTestCase):
             headers = {"content-type":"application/json"}
             )
         self.assertEqual(login.status_code,200)
+
+    # def test_admin_can_approve_user(self):
+    #     """test approve user by super admin"""
+    #     save_admin = Admin.save(self)
+    #     super_admin_login = self.test_client.post(
+    #         "/api/v1/auth/login",
+    #         data = json.dumps(dict(
+    #             username = "admin",
+    #             password = "A123456789a!"
+    #             )),
+    #         headers = {"content-type":"appliction/json"}
+    #         )
+    #     self.assertEqual(super_admin_login.status_code,200)
 
 

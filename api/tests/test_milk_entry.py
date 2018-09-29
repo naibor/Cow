@@ -2,6 +2,8 @@ import unittest
 import json
 from datetime import datetime
 from app.endpoints.milking import MilkingProcess
+from models.milk_model import MilkingProcessModel
+# from models.milk_model import average_milk
 from tests import BaseTestCase
 
 milking_time =datetime.now()
@@ -15,8 +17,8 @@ class Test_Milk_Entry(BaseTestCase):
             "/api/v1/cow/milk",
             data = json.dumps(dict(
                 amount = "13.66",
-                time = str(milking_time.time()),
-                average = "average"
+                time = str(milking_time)
+                # average = MilkingProcessModel.average_milk()
                 )),
             headers = {"content-type":"application/json"}
             )

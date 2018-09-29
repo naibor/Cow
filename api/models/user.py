@@ -15,6 +15,7 @@ class NormalUser():
         # approved users have privilages over non approved users
 
     # save user # users are saved awaiting approval
+    # @classmethod
     def save_user(self):
         if existance(self.email):
             # check if user exists
@@ -58,7 +59,6 @@ class LogInUser(object):
     def __init__(self, password=None, username=None, email=None):
         self.username = username
         self.email = email
-
         self.password = password
 
     def logging_in_normal_user(self):
