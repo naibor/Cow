@@ -42,7 +42,7 @@ def redirect_to_docs():
 db.init_app(APP)
 
 # Import and add namespaces for the endpoints
-from restplus import API
+from . restplus import API
 from app.endpoints.auth import auth_ns
 from app.endpoints.milking import milk_ns
 

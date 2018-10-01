@@ -25,25 +25,39 @@ class MilkingProcessModel(db.Model):
         db.session.commit()
 
     # get all milk entries(view)
-    @staticmethod
-    def get_entries():
-        return MilkingProcessModel.query.all()
+    # @staticmethod
+    # def get_entries():
+    #     return MilkingProcessModel.query.all()
+
+    #get an entry by id
+    # @staticmethod
+    # def get_by_id(id):
+    #     entry = MilkingProcessModel.query.filter_by(id).all()
+    #     if not entry:
+    #         return {"message":"invalid id"}
+    #     else:
+    #         return entry
+
 
     # get a days entry
-    @staticmethod
-    def get_entry():
-        return MilkingProcessModel.query.filter_by(time.day)
+    # @staticmethod
+    # def get_entry():
+    #     return MilkingProcessModel.query.filter_by(time.day)
 
     # update a wrong entry
-    def update_entry(self):
-        MilkingProcessModel.query.filter_by(time)
+    def update_entry(id):
+        # import pdb; pdb.set_trace()
+        MilkingProcessModel.get_by_id()
+        # MilkingProcessModel.query.filter_by(time.date).all()
         MilkingProcessModel.amount = amount
         db.session.commit()
+        pass
 
     # admin can delete a days milk entry
     def delete_entry(self):
         db.session.delete()
         db.session.commit()
+        pass
 
 
 

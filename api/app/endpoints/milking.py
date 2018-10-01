@@ -19,19 +19,17 @@ class MilkingProcess(Resource):
     def post(self):
         milk_data = request.get_json()
         data, errors = Milkschema.load(milk_data)
-        # import pdb; pdb.set_trace()
         if errors:
             return (errors), 400
         else:
             milk_entry = MilkingModel(
                 data["amount"]
                 )
-        # import pdb; pdb.set_trace()
         return milk_entry.save_milk_entry()
 
-    def get(self):
-        milk_entry = MilkingModel.get_milk_entries()
-        return jsonify(milk_entry),200
+    # def get(self):
+    #     milk_entry = MilkingModel.get_milk_entries()
+    #     return jsonify(milk_entry),200
 
     def put():
         pass
