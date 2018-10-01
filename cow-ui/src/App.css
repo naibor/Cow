@@ -1,0 +1,22 @@
+.content{
+width: 40%;
+min-height:50%;
+margin:5% 30%;
+background-color:white;
+border-radius: 10px;
+font-weight: bolder;
+position: relative;
+z-index: -5;
+}
+.signupForm{
+    padding:12%;
+}
+.signupForm h3 {
+    text-align: center;
+}
+.navbar-brand{
+    color:white;
+}
+.nav-link{
+    color:white;
+}
