@@ -42,7 +42,7 @@ class NavBar extends Component{
                 <div className="collapse navbar-collapse" id="navbarContent">
                   <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
-                      <a className="nav-link" href="">About Us</a>
+                      <a className="nav-link " href="">About Us</a>
                     </li>
                     <li className="nav-item">
                       <input type="button" className="btn btn-success" value="LOG IN"></input>
