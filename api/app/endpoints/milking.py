@@ -29,7 +29,7 @@ class MilkingProcess(Resource):
 
     def get(self):
         milk_entry = MilkingModel.get_milk_entries()
-        return jsonify(milk_entry),200
+        return jsonify(milk_entry)
 
     def put():
         pass
