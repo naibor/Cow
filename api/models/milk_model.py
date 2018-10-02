@@ -25,9 +25,9 @@ class MilkingProcessModel(db.Model):
         db.session.commit()
 
     # get all milk entries(view)
-    # @staticmethod
-    # def get_entries():
-    #     return MilkingProcessModel.query.all()
+    @staticmethod
+    def get_entries():
+        return MilkingProcessModel.query.all()
 
     #get an entry by id
     # @staticmethod

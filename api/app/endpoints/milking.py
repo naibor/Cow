@@ -27,9 +27,9 @@ class MilkingProcess(Resource):
                 )
         return milk_entry.save_milk_entry()
 
-    # def get(self):
-    #     milk_entry = MilkingModel.get_milk_entries()
-    #     return jsonify(milk_entry),200
+    def get(self):
+        milk_entry = MilkingModel.get_milk_entries()
+        return jsonify(milk_entry),200
 
     def put():
         pass
