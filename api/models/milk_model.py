@@ -1,5 +1,5 @@
-from app import db
-from models.user_model import NormalUserModel
+from api.app import db
+from api.models.user_model import NormalUserModel
 
 
 class MilkingProcessModel(db.Model):

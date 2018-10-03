@@ -1,12 +1,12 @@
 # Signup, Sign In and Logout endpoints
 # api/v1/auth/signup POST
 # api/v1/auth/login POST
-from app import API
+from api.app import API
 from flask import request
 from flask_restplus import Resource
-from models.schema import Userschema, Loginschema
-from models.user import NormalUser, LogInUser
-from app.serializer import add_user, login_user
+from api.models.schema import Userschema, Loginschema
+from api.models.user import NormalUser, LogInUser
+from api.app.serializer import add_user, login_user
 
 auth_ns = API.namespace('auth', description="Authentication/Authorization operations.")
 

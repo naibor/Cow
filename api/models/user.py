@@ -1,8 +1,8 @@
-from app import db
+from api.app import db
 import os
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 from werkzeug.security import generate_password_hash
-from models.user_model import NormalUserModel, existance, correct_credentials, approve
+from api.models.user_model import NormalUserModel, existance, correct_credentials, approve
 class NormalUser():
     # user model class
     def __init__(self, username, email, password, confirm_password):

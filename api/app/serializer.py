@@ -1,6 +1,6 @@
 "schemas for the api docs"
 from flask_restplus import fields
-from app.restplus import API
+from api.app.restplus import API
 
 # User model serializer
 add_user = API.model('API user', {

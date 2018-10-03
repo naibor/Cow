@@ -5,7 +5,7 @@ from flask_jwt_extended import JWTManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 # local import
-from config import app_config
+from api.config import app_config
 
 # initialize sql-alchemy
 db = SQLAlchemy()
@@ -43,8 +43,8 @@ db.init_app(APP)
 
 # Import and add namespaces for the endpoints
 from . restplus import API
-from app.endpoints.auth import auth_ns
-from app.endpoints.milking import milk_ns
+from api.app.endpoints.auth import auth_ns
+from api.app.endpoints.milking import milk_ns
 
 API.add_namespace(auth_ns)
 API.add_namespace(milk_ns)

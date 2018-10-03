@@ -1,5 +1,6 @@
 import unittest
 import json
+from flask import request, jsonify
 from datetime import datetime
 from api.app.endpoints.milking import MilkingProcess
 from api.models.milk_model import MilkingProcessModel
@@ -11,8 +12,8 @@ milking_time =datetime.now()
 class Test_Milk_Entry(BaseTestCase):
     """test milk entries"""
 
-    def test_save_milk(self):
-        """test a user can save milk entry"""
+    def test_get_one_milk_entries(self):
+        """test a user can get milk entries"""
         milk_entry =self.test_client.post(
             "/api/v1/cow/milk",
             data = json.dumps(dict(
@@ -22,6 +23,12 @@ class Test_Milk_Entry(BaseTestCase):
                 )),
             headers = {"content-type":"application/json"}
             )
-        self.assertEqual(milk_entry.status_code,201)
+        # self.assertEqual(milk_entry.status_code,201)
 
+        # get the entry
+        get_one_entry = self.test_client.get("/api/v1/cow/milk/1",
+                headers = {"content-type":"application/json"}
+            )
 
+        # import pdb; pdb.set_trace()
+        self.assertEqual(get_one_entry.status_code,200 )

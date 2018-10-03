@@ -1,6 +1,6 @@
-from app import db
+from api.app import db
 from datetime import datetime, timedelta
-from models.milk_model import MilkingProcessModel
+from api.models.milk_model import MilkingProcessModel
 
 milking_time =datetime.now()
 
