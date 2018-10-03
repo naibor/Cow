@@ -35,8 +35,12 @@ class MilkingProcessModel(db.Model):
         entry = MilkingProcessModel.query.filter_by(id=id).first()
         return entry
 
+    # delete a days milk entry
+    def delete_entry(self):
+        db.session.delete()
+        db.session.commit()
 
-    # get a days entry
+
     # @staticmethod
     # def get_entry():
     #     return MilkingProcessModel.query.filter_by(time.day)
@@ -50,11 +54,8 @@ class MilkingProcessModel(db.Model):
         db.session.commit()
         pass
 
-    # admin can delete a days milk entry
-    def delete_entry(self):
-        db.session.delete()
-        db.session.commit()
-        pass
+
+
 
 
     # average milk production in a day

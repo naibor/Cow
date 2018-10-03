@@ -43,6 +43,11 @@ class OneMilk(Resource):
         single_entry = MilkingModel.get_one_entry(id=id)
         return jsonify(single_entry)
 
+    def delete(self,id):
+        the_entry = MilkingModel.delete_milk_entry(id=id)
+        return the_entry
+
+
 
 
 

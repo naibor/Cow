@@ -59,8 +59,21 @@ class MilkingModel():
             }
             return obj
 
-
-
+    @staticmethod
+    def delete_milk_entry(id):
+        entry = MilkingProcessModel.get_by_id(id)
+        if not entry:
+            return {"message":"id does not exist"}
+        else:
+            # obj = {
+            # "milk_id": entry.id,
+            # "user_id":entry.user_id,
+            # "amount":entry.amount,
+            # "time":entry.time
+            # }
+            import pdb; pdb.set_trace()
+            MilkingProcessModel.delete_entry(entry)
+            return {"message":"you have successfully deleted a milk entry"}
 
 
 
