@@ -65,20 +65,29 @@ class MilkingModel():
         if not entry:
             return {"message":"id does not exist"}
         else:
-            # obj = {
-            # "milk_id": entry.id,
-            # "user_id":entry.user_id,
-            # "amount":entry.amount,
-            # "time":entry.time
-            # }
-            import pdb; pdb.set_trace()
             MilkingProcessModel.delete_entry(entry)
             return {"message":"you have successfully deleted a milk entry"}
 
 
+    @staticmethod
+    def edit_an_entry(new_milk_entry, id):
+        particular_entry = MilkingProcessModel.get_by_id(id=id)
+        if not particular_entry:
+            return {"message":"id does not exist"}
+        else:
+            particular_entry.amount = new_milk_entry.amount
+            particular_entry.time = new_milk_entry.time
 
-    # def edit_an_entry(self.time):
-    #     MilkingProcessModel.update_entry()
-    #     pass
+        update = MilkingProcessModel.update_entry(particular_entry)
+        obj = {
+            "milk_id": update.id,
+            "user_id":update.user_id,
+            "amount":update.amount,
+            "time":update.time
+            }
+        return {"message":"you have successfully updated the milk entry"}, obj
+
+    # import pdb; pdb.set_trace()
+
 
 
