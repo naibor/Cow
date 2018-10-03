@@ -29,7 +29,7 @@ class MilkingModel():
     @staticmethod
     def get_milk_entries():
         entries=  MilkingProcessModel.get_entries()
-        # import pdb; pdb.set_trace()
+
         milk_entries_list = []
         if entries:
             for entry in entries:
@@ -44,9 +44,22 @@ class MilkingModel():
         else:
             return {"message":"no milk entries available"}
 
-    # @staticmethod
-    # def get_one_entry(id):
-    #     MilkingProcessModel.get_by_id(entry.id)
+    @staticmethod
+    def get_one_entry(id):
+        entry = MilkingProcessModel.get_by_id(id)
+        # import pdb; pdb.set_trace()
+        if not entry:
+            return {"message":"invalid id"}
+        else:
+            obj = {
+            "milk_id": entry.id,
+            "user_id":entry.user_id,
+            "amount":entry.amount,
+            "time":entry.time
+            }
+            return obj
+
+
 
 
 

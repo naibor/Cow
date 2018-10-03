@@ -36,6 +36,12 @@ class MilkingProcess(Resource):
     def delete():
         pass
 
+@milk_ns.route('/<int:id>')
+class OneMilk(Resource):
+    """single milk entry resource"""
+    def get(self,id):
+        single_entry = MilkingModel.get_one_entry(id=id)
+        return jsonify(single_entry)
 
 
 

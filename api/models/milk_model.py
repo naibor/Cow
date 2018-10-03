@@ -29,14 +29,11 @@ class MilkingProcessModel(db.Model):
     def get_entries():
         return MilkingProcessModel.query.all()
 
-    #get an entry by id
-    # @staticmethod
-    # def get_by_id(id):
-    #     entry = MilkingProcessModel.query.filter_by(id).all()
-    #     if not entry:
-    #         return {"message":"invalid id"}
-    #     else:
-    #         return entry
+    # get an entry by id
+    @staticmethod
+    def get_by_id(id):
+        entry = MilkingProcessModel.query.filter_by(id=id).first()
+        return entry
 
 
     # get a days entry
@@ -58,7 +55,6 @@ class MilkingProcessModel(db.Model):
         db.session.delete()
         db.session.commit()
         pass
-
 
 
     # average milk production in a day
