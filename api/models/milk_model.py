@@ -1,5 +1,5 @@
-from api.app import db
-from api.models.user_model import NormalUserModel
+from app import db
+from models.user_model import NormalUserModel
 
 
 class MilkingProcessModel(db.Model):
@@ -37,7 +37,7 @@ class MilkingProcessModel(db.Model):
 
     # delete a days milk entry
     def delete_entry(self):
-        db.session.delete()
+        db.session.delete(self)
         db.session.commit()
 
 

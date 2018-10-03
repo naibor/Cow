@@ -3,11 +3,11 @@
 # api/v1/cow/milk POST
 # api/v1/cow/milk GET
 # api/v1/cow/milk PUT
-from api.app import API
+from app import API
 from flask import request, jsonify
 from flask_restplus import Resource
-from api.models.milk import MilkingModel
-from api.models.schema import Milkschema
+from models.milk import MilkingModel
+from models.schema import Milkschema
 milk_ns = API.namespace('milk',
                         description="Milk entry/milk entry operations.",
                         path='/cow/milk')

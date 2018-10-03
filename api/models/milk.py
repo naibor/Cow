@@ -1,6 +1,6 @@
-from api.app import db
+from app import db
 from datetime import datetime, timedelta
-from api.models.milk_model import MilkingProcessModel
+from models.milk_model import MilkingProcessModel
 
 milking_time =datetime.now()
 
@@ -42,14 +42,14 @@ class MilkingModel():
                 milk_entries_list.append(obj)
             return milk_entries_list
         else:
-            return {"message":"no milk entries available"}
+            return {"message":"No milk entries available"}
 
     @staticmethod
     def get_one_entry(id):
         entry = MilkingProcessModel.get_by_id(id)
         # import pdb; pdb.set_trace()
         if not entry:
-            return {"message":"invalid id"}
+            return {"message":"The id entered is invalid"}
         else:
             obj = {
             "milk_id": entry.id,
