@@ -54,5 +54,8 @@ API.add_namespace(milk_ns)
 API.init_app(APP)
 CORS(APP)
 
+jwt_manager._set_error_handler_callbacks(API)
+
+
 
 
