@@ -22,4 +22,4 @@ API = Api(
     doc='/api/v1/docs'
 )
 
-jwt_manager._set_error_handler_callbacks(API)
+# jwt_manager._set_error_handler_callbacks(API)

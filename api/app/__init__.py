@@ -17,6 +17,7 @@ APP = Flask(__name__, instance_relative_config=True)
 # APP = Flask('api', instance_relative_config=True)
 
 APP.config.from_object(app_config[config_name])
+APP.config['PROPAGATE_EXCEPTIONS'] = True
 jwt_manager = JWTManager(APP)
 
 # overide 404 error handler
