@@ -6,9 +6,9 @@ def validate_username(username):
     """validate username"""
     username_re = re.fullmatch(re.compile(r"^\w+$"),username)
     if not username_re:
-        raise ValidationError("Please enter a username")
+        raise ValidationError("Please enter a name")
     elif len(username) < 3:
-        raise ValidationError("The username entered is too short")
+        raise ValidationError("The name entered is too short")
 
 def validate_email(email):
     """Validate user email"""
@@ -57,5 +57,15 @@ class Milk(Schema):
     time = fields.DateTime(required=False)
     average = fields.Float(required=False)
 Milkschema = Milk()
+
+class Cow(Schema):
+    """cow construction schema"""
+    moo_name = fields.Str(validate=validate_username, required=True)
+    breed = fields.Str(validate=validate_username, required=True)
+    age = fields.Int(required=True)
+    cow_health = fields.Str(required=True)
+    time = fields.DateTime(required=False)
+Cowschema = Cow()
+
 
 

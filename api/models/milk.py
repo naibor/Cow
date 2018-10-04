@@ -26,9 +26,6 @@ class MilkingModel():
         return {"message":"successfully saved an entry"},201
 
 
-    # def get_average():
-    #     return MilkingProcessModel.average_milk()
-
     @staticmethod
     def get_milk_entries():
         entries=  MilkingProcessModel.get_entries()
@@ -39,6 +36,7 @@ class MilkingModel():
                 obj = {
                 "milk_id":entry.id,
                 "user_id":entry.user_id,
+                "cow_id":entry.cow_id,
                 "amount":entry.amount,
                 "time":entry.time
                 }
@@ -57,6 +55,7 @@ class MilkingModel():
             obj = {
             "milk_id": entry.id,
             "user_id":entry.user_id,
+            "cow_id":entry.cow_id,
             "amount":entry.amount,
             "time":entry.time
             }
@@ -85,6 +84,7 @@ class MilkingModel():
         obj = {
             "milk_id": update.id,
             "user_id":update.user_id,
+            "cow_id":update.cow_id,
             "amount":update.amount,
             "time":update.time
             }

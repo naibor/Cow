@@ -20,3 +20,4 @@ API = Api(
     prefix='/api/v1',
     doc='/api/v1/docs'
 )
+
