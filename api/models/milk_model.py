@@ -35,26 +35,15 @@ class MilkingProcessModel(db.Model):
         entry = MilkingProcessModel.query.filter_by(id=id).first()
         return entry
 
-
-    # get a days entry
-    # @staticmethod
-    # def get_entry():
-    #     return MilkingProcessModel.query.filter_by(time.day)
+    # delete a days milk entry
+    def delete_entry(self):
+        db.session.delete(self)
+        db.session.commit()
 
     # update a wrong entry
-    def update_entry(id):
-        # import pdb; pdb.set_trace()
-        MilkingProcessModel.get_by_id()
-        # MilkingProcessModel.query.filter_by(time.date).all()
-        MilkingProcessModel.amount = amount
+    def update_entry(self):
         db.session.commit()
-        pass
-
-    # admin can delete a days milk entry
-    def delete_entry(self):
-        db.session.delete()
-        db.session.commit()
-        pass
+        return self
 
 
     # average milk production in a day

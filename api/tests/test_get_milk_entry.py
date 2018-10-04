@@ -33,4 +33,3 @@ class Test_Milk_Entry(BaseTestCase):
         # import pdb; pdb.set_trace()
         self.assertEqual(get_entry.status_code,200 )
         # self.assertIn("13.66",str(milk_entry.data))
-
