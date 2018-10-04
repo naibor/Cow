@@ -22,21 +22,21 @@ class CowAssemblyModel(db.Model):
         self.cow_health = cow_health
         self.time = time
 
-      # save cow
+    # save cow
     def save_entry(self):
         db.session.add(self)
         db.session.commit()
 
     # get all cows(view)
     @staticmethod
-    def get_entries():
+    def get_cows():
         return CowAssemblyModel.query.all()
 
-    # get an entry by id
+    # get a cow by id
     @staticmethod
     def get_by_id(id):
-        entry = CowAssemblyModel.query.filter_by(id=id).first()
-        return entry
+        cow = CowAssemblyModel.query.filter_by(id=id).first()
+        return cow
 
     # delete a days milk entry
     def delete_entry(self):
