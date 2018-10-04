@@ -1,16 +1,19 @@
 # Signup, Sign In and Logout endpoints
+# api/v1/auth/signup POST
+# api/v1/auth/login POST
 from app import API
 from flask import request
 from flask_restplus import Resource
 from models.schema import Userschema, Loginschema
 from models.user import NormalUser, LogInUser
+from app.serializer import add_user, login_user
 
 auth_ns = API.namespace('auth', description="Authentication/Authorization operations.")
 
 @auth_ns.route('/signup')
 class SignUp(Resource):
     """normal user signup resource """
-    @API.expect(Userschema)
+    @API.expect(add_user)
     def post (self):
         signup_data = request.get_json()
         data, errors = Userschema.load(signup_data)
@@ -28,6 +31,7 @@ class SignUp(Resource):
 @auth_ns.route('/login')
 class LogIn(Resource):
     """A user can login"""
+    @API.expect(login_user)
     def post(self):
         login_data = request.get_json()
         data, errors =  Loginschema.load(login_data)

@@ -51,4 +51,11 @@ class LoginUser(Schema):
     password = fields.Str(required=True)
 Loginschema = LoginUser()
 
+class Milk(Schema):
+    """milk entry details schema"""
+    amount = fields.Float(required=True)
+    time = fields.DateTime(required=False)
+    average = fields.Float(required=False)
+Milkschema = Milk()
+
 
