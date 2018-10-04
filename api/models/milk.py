@@ -14,11 +14,14 @@ class MilkingModel():
         # self.average = get_average()
 
     def save_milk_entry(self):
-        milk =  MilkingProcessModel(
-            self.amount,
-            self.time,
-            # self.average
+        the_cow = MilkingProcessModel.get_cow_id()
+        if the_cow:
+            milk =  MilkingProcessModel(
+            amount = self.amount,
+            time = self.time,
+            cow_id = cow_id
             )
+
         MilkingProcessModel.save_entry(milk)
         return {"message":"successfully saved an entry"},201
 

@@ -29,6 +29,13 @@ class MilkingProcessModel(db.Model):
     def get_entries():
         return MilkingProcessModel.query.all()
 
+    # get the cow_id
+    @staticmethod
+    def get_cow_id():
+        return MilkingProcessModel.query.filter_by(id=cow_id).first()
+
+
+
     # get an entry by id
     @staticmethod
     def get_by_id(id):

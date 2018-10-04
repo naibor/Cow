@@ -1,8 +1,9 @@
 # endpoints for milk entries
-# api/v1/cow/milk DELETE
-# api/v1/cow/milk POST
-# api/v1/cow/milk GET
-# api/v1/cow/milk PUT
+# api/v1/cow/<int:cow_id>/milk DELETE
+# api/v1/cow/<int:cow_id>/milk POST
+# api/v1/cow/<int:cow_id>/milk GET #all for a secific cow
+# api/v1/cow/milk GET #all entries
+# api/v1/cow/<int:cow_id>/milk PUT
 from app import API
 from flask import request, jsonify
 from flask_restplus import Resource
@@ -10,13 +11,13 @@ from models.milk import MilkingModel
 from models.schema import Milkschema
 milk_ns = API.namespace('milk',
                         description="Milk entry/milk entry operations.",
-                        path='/cow/milk')
+                        path='/cow/<int:cow_id>/milk')
 
 @milk_ns.route('')
 class MilkingProcess(Resource):
 
     """milk entries resource"""
-    def post(self):
+    def post(self, cow_id):
         milk_data = request.get_json()
         data, errors = Milkschema.load(milk_data)
         if errors:
