@@ -54,7 +54,7 @@ class MooModel():
         cow = CowAssemblyModel.get_by_id(id)
         # import pdb; pdb.set_trace()
         if not cow:
-            return {"message":"The id entered is invalid"}
+            return {"message":"The id entered is invalid probably doesn't exist"}
         else:
             obj = {
             "cow_id":cow.id,
@@ -89,4 +89,12 @@ class MooModel():
             }
         return {"message":"you have successfully updated this cow"}, obj
 
-
+    # delete a cow
+    @staticmethod
+    def delete_a_cow(id):
+        cow = CowAssemblyModel.get_by_id(id)
+        if not cow:
+            return {"message":"cow id does not exist"}
+        else:
+            CowAssemblyModel.delete_cow(cow)
+            return {"message":"you have successfully deleted a cow from existance"}

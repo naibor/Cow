@@ -59,5 +59,10 @@ class OneCow(Resource):
             updated_cow = MooModel.edit_a_cow(new_improved_cow, id)
             return jsonify(updated_cow)
 
+    # delete a cow
+    def delete(self,id):
+        the_cow = MooModel.delete_a_cow(id=id)
+        return the_cow
+
 
 

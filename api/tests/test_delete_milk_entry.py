@@ -29,7 +29,4 @@ class Test_Milk_Entry(BaseTestCase):
         delete_entry = self.test_client.delete("/api/v1/cow/milk/1",
                 headers = {"content-type":"application/json"}
             )
-
-        # import pdb; pdb.set_trace()
         self.assertEqual(delete_entry.status_code,200 )
-        # self.assertIn("13.66",str(milk_entry.data))

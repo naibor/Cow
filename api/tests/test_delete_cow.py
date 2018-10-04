@@ -3,7 +3,6 @@ import json
 from datetime import datetime
 from app.endpoints.cow_construction import ConstructionProcess
 from models.cow_model import CowAssemblyModel
-
 from tests import BaseTestCase
 
 assembly_time =datetime.now()
@@ -11,8 +10,8 @@ assembly_time =datetime.now()
 class Test_Cow_Construction(BaseTestCase):
     """test cow construction"""
 
-    def test_view_all_cows(self):
-        """test a user can view created cows"""
+    def test_delete_cow(self):
+        """test a user can delete a cow"""
         cow =self.test_client.post(
             "/api/v1/cow",
             data = json.dumps(dict(
@@ -26,10 +25,10 @@ class Test_Cow_Construction(BaseTestCase):
             )
         # self.assertEqual(cow.status_code,201)
 
-        # get the cows
-        get_cows = self.test_client.get("/api/v1/cow",
+        # delete the cows
+        delete_cow = self.test_client.delete("/api/v1/cow/1",
                 headers = {"content-type":"application/json"}
             )
-        self.assertEqual(get_cows.status_code,200 )
+        self.assertEqual(delete_cow.status_code,200 )
 
 

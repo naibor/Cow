@@ -29,6 +29,4 @@ class Test_Milk_Entry(BaseTestCase):
         get_one_entry = self.test_client.get("/api/v1/cow/milk/1",
                 headers = {"content-type":"application/json"}
             )
-
-        # import pdb; pdb.set_trace()
         self.assertEqual(get_one_entry.status_code,200 )
