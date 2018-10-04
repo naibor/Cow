@@ -36,6 +36,7 @@ class MooModel():
         if cows:
             for cow in cows:
                 obj = {
+                "cow_id":cow.id,
                 "moo_name":cow.moo_name,
                 "breed":cow.breed,
                 "age":cow.age,
@@ -56,6 +57,7 @@ class MooModel():
             return {"message":"The id entered is invalid"}
         else:
             obj = {
+            "cow_id":cow.id,
             "moo_name":cow.moo_name,
             "breed":cow.breed,
             "age":cow.age,
@@ -78,6 +80,7 @@ class MooModel():
 
         cow = CowAssemblyModel.update_cow(particular_cow)
         obj = {
+            "cow_id":cow.id,
             "moo_name":cow.moo_name,
             "breed":cow.breed,
             "age":cow.age,
