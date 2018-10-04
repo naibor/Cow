@@ -1,5 +1,6 @@
 """RESTPLus API init"""
 from flask_restplus import Api
+from app import jwt_manager
 
 # Linting exception
 # pylint: disable=C0103
@@ -20,3 +21,5 @@ API = Api(
     prefix='/api/v1',
     doc='/api/v1/docs'
 )
+
+jwt_manager._set_error_handler_callbacks(API)

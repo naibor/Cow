@@ -13,8 +13,8 @@ db = SQLAlchemy()
 
 # Get the instance config to use
 config_name = os.environ.get("APP_CONFIG", "development")
-# APP = Flask(__name__, instance_relative_config=True)
-APP = Flask('api', instance_relative_config=True)
+APP = Flask(__name__, instance_relative_config=True)
+# APP = Flask('api', instance_relative_config=True)
 
 APP.config.from_object(app_config[config_name])
 jwt_manager = JWTManager(APP)
