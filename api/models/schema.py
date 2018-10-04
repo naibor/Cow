@@ -44,4 +44,11 @@ class Userschema(Schema):
     confirm_password = fields.Str(required=True)
 Userschema = Userschema()
 
+class LoginUser(Schema):
+    """user login detail schema"""
+    username = fields.Str(required=False)
+    email = fields.Str(required=False)
+    password = fields.Str(required=True)
+Loginschema = LoginUser()
+
 

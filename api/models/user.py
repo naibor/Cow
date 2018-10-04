@@ -1,9 +1,9 @@
 # Note from 2018-08-29 16:17:23.601
 from app import db
-import jwt
 import os
-from werkzeug.security import generate_password_hash,check_password_hash
-from models.model import NormalUserModel, existance
+from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
+from werkzeug.security import generate_password_hash
+from models.model import NormalUserModel, existance, correct_credentials, approve
 class NormalUser():
     # user model class
     def __init__(self, username, email, password, confirm_password):
@@ -12,50 +12,73 @@ class NormalUser():
         self.password = password
         self.confirm_password = confirm_password
         self.approved = False
+        self.admin = False
         # approved users have privilages over non approved users
 
     # save user # users are saved awaiting approval
     def save_user(self):
-        # check if user exists
-        # check if password and confirm password match
-        # hash password
-        # then save
         if existance(self.email):
-            return "user already exists login instead"
+            # check if user exists
+            return {"message": "user already exists login instead"}, 400
         elif self.password != self.confirm_password:
-            return {"message":"password and confirm password should be the same"}
+            # check if password and confirm password match
+            return {"message": "password and confirm password should be the same"}, 400
         else:
+            # hash password
             self.password = generate_password_hash(self.password,method="sha256")
-            # self.confirm_password __delattr__()
-            new =NormalUserModel(self.username,self.email,self.password,self.approved)
+            new =NormalUserModel(
+                self.username,
+                self.email,
+                self.password,
+                self.approved,
+                self.admin
+                )
             NormalUserModel.save(new)
-        # import pdb; pdb.set_trace()
-
-        return {"messege":"successfully signed up "}
-
-
-
-    def logging_in_normal_user(self):
-            correct_credentials(self.username,self.password)
-            if the_user or the_email and check_password_hash(password):
-                access_token = jwt.encode("id","SECRET KEY")
-                return {"access_token" : access_token.decode("UTF-8"),
-                "message":"successfully logged in"},200
-            else:
-                return {"message":"wrong credentials provided, check the username and password"},404
+            # then save
+        return {"message": "successfully signed up"}, 201
 
 
 
 class Admin(NormalUser):
-    def __init__(self, username, email, password,confirm_password, admin = True):
-        super().__init__(username, email, password,confirm_password)
+    def __init__(self):
+        super().__init__("admin", "admin@cow.io", "A123456789a!", "A123456789a!")
+        self.approved = True
         self.admin = True
-        self.username = Admin
-        self.password = "A123456789a!"
 
-    def approve_user(self):
-        approve()
-        return {message:"successefully approved"}
+    def save(self):
+        self.save_user()
+        return {"message": "super user created successfully"}
+    @staticmethod
+    def grant_privilage():
+        return approve()
+
+
+
+class LogInUser(object):
+    """user login model"""
+    def __init__(self, password=None, username=None, email=None):
+        self.username = username
+        self.email = email
+
+        self.password = password
+
+    def logging_in_normal_user(self):
+
+            if self.username:
+                if correct_credentials(self.password, username=self.username) == True:
+                    access_token = create_access_token(identity=self.username)
+                    return {"access_token" :access_token,
+                            "message":"successfully logged in"
+                           }, 200
+            elif self.email:
+                if correct_credentials(self.password, email=self.email) == True:
+                    access_token = create_access_token(identity=self.username)
+                    return {"access_token" :access_token,
+                            "message":"successfully logged in"
+                           },200
+            return {"message":"wrong credentials provided, check the username and password"},400
+
+
 
 
 

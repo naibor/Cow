@@ -26,7 +26,7 @@ class BaseTestCase(TestCase):
         with APP.app_context():
             # drop all tables
             db.session.remove()
-            db.drop_all
+            db.drop_all()
 
 
 if __name__=="__main__":
