@@ -1,8 +1,8 @@
 import unittest
 import json
-from api.app.endpoints.auth import SignUp
-from api.models.user import NormalUser, Admin
-from api.tests import BaseTestCase
+from app.endpoints.auth import SignUp
+from models.user import NormalUser, Admin
+from tests import BaseTestCase
 
 class Test_SignUp(BaseTestCase):
     """Test user signup"""

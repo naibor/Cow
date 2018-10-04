@@ -1,6 +1,6 @@
 # Test suit for application setup code
 import json
-from api.tests import BaseTestCase
+from tests import BaseTestCase
 
 class AppBoilerPlateTestCase(BaseTestCase):
     """

@@ -2,10 +2,10 @@ import unittest
 import json
 from flask import request, jsonify
 from datetime import datetime
-from api.app.endpoints.milking import MilkingProcess
-from api.models.milk_model import MilkingProcessModel
+from app.endpoints.milking import MilkingProcess
+from models.milk_model import MilkingProcessModel
 # from models.milk_model import average_milk
-from api.tests import BaseTestCase
+from tests import BaseTestCase
 
 milking_time =datetime.now()
 
