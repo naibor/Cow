@@ -39,12 +39,12 @@ class CowAssemblyModel(db.Model):
         return cow
 
     # delete a days milk entry
-    def delete_entry(self):
+    def delete_cow(self):
         db.session.delete(self)
         db.session.commit()
 
     # update a wrong entry
-    def update_entry(self):
+    def update_cow(self):
         db.session.commit()
         return self
 

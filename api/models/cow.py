@@ -49,7 +49,7 @@ class MooModel():
 
 
     @staticmethod
-    def get_one_cow(id):
+    def let_one_cow_out(id):
         cow = CowAssemblyModel.get_by_id(id)
         # import pdb; pdb.set_trace()
         if not cow:
@@ -63,3 +63,27 @@ class MooModel():
             "time":cow.time
             }
         return obj
+
+    @staticmethod
+    def edit_a_cow(new_improved_cow, id):
+        particular_cow = CowAssemblyModel.get_by_id(id=id)
+        if not particular_cow:
+            return {"message":"id does not exist"}
+        else:
+            particular_cow.moo_name = new_improved_cow.moo_name
+            particular_cow.breed = new_improved_cow.breed
+            particular_cow.age = new_improved_cow.age
+            particular_cow.cow_health = new_improved_cow.cow_health
+            particular_cow.time = new_improved_cow.time
+
+        cow = CowAssemblyModel.update_cow(particular_cow)
+        obj = {
+            "moo_name":cow.moo_name,
+            "breed":cow.breed,
+            "age":cow.age,
+            "cow_health":cow.cow_health,
+            "time":cow.time
+            }
+        return {"message":"you have successfully updated this cow"}, obj
+
+
