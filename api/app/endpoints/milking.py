@@ -27,15 +27,21 @@ class MilkingProcess(Resource):
                 )
         return milk_entry.save_milk_entry()
 
-    # def get(self):
-    #     milk_entry = MilkingModel.get_milk_entries()
-    #     return jsonify(milk_entry),200
+    def get(self):
+        milk_entry = MilkingModel.get_milk_entries()
+        return jsonify(milk_entry)
 
     def put():
         pass
     def delete():
         pass
 
+@milk_ns.route('/<int:id>')
+class OneMilk(Resource):
+    """single milk entry resource"""
+    def get(self,id):
+        single_entry = MilkingModel.get_one_entry(id=id)
+        return jsonify(single_entry)
 
 
 
