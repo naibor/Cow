@@ -4,6 +4,7 @@ from flask import Flask, make_response, jsonify, redirect
 from flask_jwt_extended import JWTManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+# from flask_restplus import Api
 # local import
 from config import app_config
 
@@ -19,6 +20,8 @@ APP = Flask(__name__, instance_relative_config=True)
 APP.config.from_object(app_config[config_name])
 APP.config['PROPAGATE_EXCEPTIONS'] = True
 jwt_manager = JWTManager(APP)
+# Application =Api(APP)
+# jwt_manager._set_error_handler_callbacks(Application)
 
 # overide 404 error handler
 
@@ -48,13 +51,13 @@ db.init_app(APP)
 from . restplus import API
 from app.endpoints.auth import auth_ns
 from app.endpoints.milking import milk_ns
-
+from app.endpoints.cow_construction import cow_ns
 API.add_namespace(auth_ns)
 API.add_namespace(milk_ns)
+API.add_namespace(cow_ns)
 API.init_app(APP)
 CORS(APP)
 
-jwt_manager._set_error_handler_callbacks(API)
 
 
 

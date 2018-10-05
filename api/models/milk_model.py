@@ -1,5 +1,7 @@
 from app import db
 from models.user_model import NormalUserModel
+from models.cow_model import CowAssemblyModel
+
 
 
 class MilkingProcessModel(db.Model):
@@ -9,6 +11,8 @@ class MilkingProcessModel(db.Model):
     id = db.Column(db.Integer,primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     users = db.relationship("NormalUserModel", backref=("users"))
+    cow_id = db.Column(db.Integer, db.ForeignKey('cow.id'))
+    cow = db.relationship("CowAssemblyModel", backref=("cow"))
     amount = db.Column(db.Float)
     time = db.Column(db.DateTime)
     # average = db.Column(db.Float)
