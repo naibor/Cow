@@ -57,7 +57,6 @@ class MilkingModel():
         return milk_entries_list
 
 
-
     @staticmethod
     def get_milk_entries():
         entries=  MilkingProcessModel.get_entries()

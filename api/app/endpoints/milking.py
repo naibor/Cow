@@ -40,13 +40,9 @@ class MilkingProcess(Resource):
         return milk_entry.save_milk_entry()
 
     def get(self,cow_id):
-        milk_entry = MilkingModel.get_milk_entries_for_particular_cow(id=cow_id)
-        return jsonify(milk_entry)
+        milk_entries = MilkingModel.get_milk_entries_for_particular_cow(id=cow_id)
+        return jsonify(milk_entries)
 
-    def put():
-        pass
-    def delete():
-        pass
 
 @milk_ns.route('/<int:id>')
 class OneMilk(Resource):
@@ -54,11 +50,13 @@ class OneMilk(Resource):
 
     # get a single milk entry
     def get(self, id, cow_id):
+        milk_entry = MilkingModel.get_milk_entries_for_particular_cow(id=cow_id)
         single_entry = MilkingModel.get_one_entry(id=id)
         return jsonify(single_entry)
 
     # delete  single milk entry
     def delete(self, id, cow_id):
+        milk_entry = MilkingModel.get_milk_entries_for_particular_cow(id=cow_id)
         the_entry = MilkingModel.delete_milk_entry(id=id)
         return the_entry
 
@@ -69,6 +67,7 @@ class OneMilk(Resource):
         if errors:
             return (errors),400
         else:
+            MilkingModel.get_cow_id(id=cow_id)
             new_milk_entry = MilkingModel(
                 data["amount"]
                 )
