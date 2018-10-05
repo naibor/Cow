@@ -40,7 +40,24 @@ class OneCow(Resource):
 
     # get a single cow
     def get(self,id):
-        one_cow = MooModel.get_one_cow(id=id)
+        one_cow = MooModel.let_one_cow_out(id=id)
         return jsonify(one_cow)
+
+    # update a cow
+    def put(self,id):
+        to_be_updated = request.get_json()
+        data, errors = Cowschema.load(to_be_updated)
+        if errors:
+            return (errors),400
+        else:
+            new_improved_cow = MooModel(
+                data["moo_name"],
+                data["breed"],
+                data["age"],
+                data["cow_health"]
+                )
+            updated_cow = MooModel.edit_a_cow(new_improved_cow, id)
+            return jsonify(updated_cow)
+
 
 
