@@ -8,11 +8,11 @@ from tests import BaseTestCase
 
 assembly_time =datetime.now()
 
-class Test_Milk_Entry(BaseTestCase):
-    """test milk entries"""
+class Test_Cow_Construction(BaseTestCase):
+    """test cow construction"""
 
-    def test_update_milk_entries(self):
-        """test a user can get milk entries"""
+    def test_update_cow(self):
+        """test a user can update a cow"""
         milk_entry =self.test_client.post(
             "/api/v1/cow/milk",
             data = json.dumps(dict(
@@ -32,8 +32,7 @@ class Test_Milk_Entry(BaseTestCase):
                     moo_name = "Bronze",
                     breed = "Bull",
                     age = "3",
-                    cow_health="Had menengitis last year",
-                    # time = str(assembly_time)
+                    cow_health="Had menengitis last year"
                     )),
                 headers = {"content-type":"application/json"}
             )
