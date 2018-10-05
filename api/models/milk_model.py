@@ -12,15 +12,15 @@ class MilkingProcessModel(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     users = db.relationship("NormalUserModel", backref=("users"))
     cow_id = db.Column(db.Integer, db.ForeignKey('cow.id'))
-    cow = db.relationship("CowAssemblyModel", backref=("cow"))
     amount = db.Column(db.Float)
     time = db.Column(db.DateTime)
     # average = db.Column(db.Float)
 
-    def __init__(self, amount, time ): #average
+    def __init__(self, amount, time, cow_id ): #average
         """initilize the db table"""
         self.amount = amount
         self.time = time
+        self.cow_id = cow_id
         # self.average = average
 
     # save a milk entry
@@ -28,17 +28,25 @@ class MilkingProcessModel(db.Model):
         db.session.add(self)
         db.session.commit()
 
+
+    @staticmethod
+    def save_cow_id(cow_id):
+        pass
+
+
     # get all milk entries(view)
     @staticmethod
     def get_entries():
         return MilkingProcessModel.query.all()
 
-    # get the cow_id
+    # all entries for a specific cow
     @staticmethod
-    def get_cow_id():
-        return MilkingProcessModel.query.filter_by(id=cow_id).first()
-
-
+    def get_entries_by_cow(id):
+        import pdb; pdb.set_trace()
+        entries = MilkingProcessModel.query.filter_by(cow_id= id).all()
+        # if not entries:
+            # return {"message":"the id"}
+        return entries
 
     # get an entry by id
     @staticmethod

@@ -1,6 +1,7 @@
 from app import db
 from datetime import datetime, timedelta
 from models.milk_model import MilkingProcessModel
+from models.cow import MooModel
 
 milking_time =datetime.now()
 
@@ -8,22 +9,53 @@ milking_time =datetime.now()
 
 class MilkingModel():
     """milk entry model"""
-    def __init__(self, amount):
+    def __init__(self, amount ):
         self.amount = amount
         self.time = str(milking_time)
-        # self.average = get_average()
+        self.cow_id = MilkingProcessModel.cow_id
+
 
     def save_milk_entry(self):
-        the_cow = MilkingProcessModel.get_cow_id()
-        if the_cow:
-            milk =  MilkingProcessModel(
-            amount = self.amount,
-            time = self.time,
-            cow_id = cow_id
+        milk =  MilkingProcessModel(
+            self.amount,
+            self.time,
+            self.cow_id
             )
-
         MilkingProcessModel.save_entry(milk)
         return {"message":"successfully saved an entry"},201
+
+    # the associted cow
+    @staticmethod
+    def get_cow_id(id):
+        cow = MooModel.get_the_cow_id(id=id)
+        # import pdb; pdb.set_trace()
+        if not cow:
+            return {"message":"non existant cow"}
+        else:
+            obj = {
+            "cow_id":cow.id,
+            }
+            MilkingProcessModel.cow_id = obj["cow_id"]
+
+    @staticmethod
+    def get_milk_entries_for_particular_cow(id):
+        import pdb; pdb.set_trace()
+        cow_entries = MilkingProcessModel.get_entries_by_cow(id=id)
+        milk_entries_list = []
+        if not cow_entries:
+            return{"message":"this cow has no milk entries"}
+        else:
+            for entry in cow_entries:
+                obj = {
+                "milk_id":entry.id,
+                "user_id":entry.user_id,
+                "cow_id":entry.cow_id,
+                "amount":entry.amount,
+                "time":entry.time
+                }
+                milk_entries_list.append(obj)
+        return milk_entries_list
+
 
 
     @staticmethod

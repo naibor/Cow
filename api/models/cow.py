@@ -66,6 +66,14 @@ class MooModel():
             }
         return obj
 
+    # get cow by id for milk entry sake
+    @staticmethod
+    def get_the_cow_id(id):
+        # import pdb; pdb.set_trace()
+        cow_id = CowAssemblyModel.get_by_id(id)
+        return cow_id
+
+
     @staticmethod
     def edit_a_cow(new_improved_cow, id):
         particular_cow = CowAssemblyModel.get_by_id(id=id)
