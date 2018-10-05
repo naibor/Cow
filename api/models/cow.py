@@ -26,3 +26,25 @@ class MooModel():
             )
         CowAssemblyModel.save_entry(cow)
         return {"message":"successfully created a cow"},201
+
+    # get all the cows
+    @staticmethod
+    def let_the_cows_out():
+        cows =  CowAssemblyModel.get_entries()
+
+        cows_list = []
+        if cows:
+            for cow in cows:
+                obj = {
+                "moo_name":cow.moo_name,
+                "breed":cow.breed,
+                "age":cow.age,
+                "cow_health":cow.cow_health,
+                "time":cow.time
+                }
+                cows_list.append(obj)
+            return cows_list
+        else:
+            return {"message":"No cow available yet, consider constructing one"}
+
+

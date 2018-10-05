@@ -29,3 +29,9 @@ class ConstructionProcess(Resource):
                 data["cow_health"]
                 )
         return new_cow.save_cow()
+
+    def get(self):
+        cow = MooModel.let_the_cows_out()
+        return jsonify(cow)
+
+
