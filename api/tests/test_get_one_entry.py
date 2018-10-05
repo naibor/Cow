@@ -15,7 +15,7 @@ class Test_Milk_Entry(BaseTestCase):
     def test_get_one_milk_entries(self):
         """test a user can get milk entries"""
         milk_entry =self.test_client.post(
-            "/api/v1/cow/milk",
+            "/api/v1/cow/1/milk",
             data = json.dumps(dict(
                 amount = "13.66",
                 time = str(milking_time)
@@ -26,7 +26,7 @@ class Test_Milk_Entry(BaseTestCase):
         # self.assertEqual(milk_entry.status_code,201)
 
         # get the entry
-        get_one_entry = self.test_client.get("/api/v1/cow/milk/1",
+        get_one_entry = self.test_client.get("/api/v1/cow/1/milk/1",
                 headers = {"content-type":"application/json"}
             )
         self.assertEqual(get_one_entry.status_code,200 )

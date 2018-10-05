@@ -15,7 +15,7 @@ class Test_Milk_Entry(BaseTestCase):
     def test_delete_a_milk_entry(self):
         """test a user can get milk entries"""
         milk_entry =self.test_client.post(
-            "/api/v1/cow/milk",
+            "/api/v1/cow/1/milk",
             data = json.dumps(dict(
                 amount = "13.66",
                 time = str(milking_time)
@@ -26,7 +26,7 @@ class Test_Milk_Entry(BaseTestCase):
         # self.assertEqual(milk_entry.status_code,201)
 
         # delete the entry
-        delete_entry = self.test_client.delete("/api/v1/cow/milk/1",
+        delete_entry = self.test_client.delete("/api/v1/cow/1/milk/1",
                 headers = {"content-type":"application/json"}
             )
         self.assertEqual(delete_entry.status_code,200 )

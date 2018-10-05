@@ -1,27 +1,27 @@
-import unittest
-import json
-from datetime import datetime
-from app.endpoints.milking import MilkingProcess
-from models.milk_model import MilkingProcessModel
-# from models.milk_model import average_milk
-from tests import BaseTestCase
+# import unittest
+# import json
+# from datetime import datetime
+# from app.endpoints.milking import MilkingProcess
+# from models.milk_model import MilkingProcessModel
 
-milking_time =datetime.now()
+# from tests import BaseTestCase
 
-class Test_Milk_Entry(BaseTestCase):
-    """test milk entries"""
+# milking_time =datetime.now()
 
-    def test_save_milk(self):
-        """test a user can save milk entry"""
-        milk_entry =self.test_client.post(
-            "/api/v1/cow/milk",
-            data = json.dumps(dict(
-                amount = "13.66",
-                time = str(milking_time)
-                # average = MilkingProcessModel.average_milk()
-                )),
-            headers = {"content-type":"application/json"}
-            )
-        self.assertEqual(milk_entry.status_code,201)
+# class Test_Milk_Entry(BaseTestCase):
+#     """test milk entries"""
+
+#     def test_save_milk_entry(self):
+#         """test a user can save milk entry"""
+#         milk_entry =self.test_client.post(
+#             "/api/v1/cow/1/milk",
+#             data = json.dumps(dict(
+#                 amount = "13.66",
+#                 time = str(milking_time),
+#                 cow_id = "1"
+#                 )),
+#             headers = {"content-type":"application/json"}
+#             )
+#         self.assertEqual(milk_entry.status_code,201)
 
 

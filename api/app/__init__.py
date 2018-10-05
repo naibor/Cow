@@ -50,10 +50,11 @@ db.init_app(APP)
 # Import and add namespaces for the endpoints
 from . restplus import API
 from app.endpoints.auth import auth_ns
-from app.endpoints.milking import milk_ns
+from app.endpoints.milking import milk_ns, all_ns
 from app.endpoints.cow_construction import cow_ns
 API.add_namespace(auth_ns)
 API.add_namespace(milk_ns)
+API.add_namespace(all_ns)
 API.add_namespace(cow_ns)
 API.init_app(APP)
 CORS(APP)

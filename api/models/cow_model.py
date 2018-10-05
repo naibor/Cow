@@ -7,6 +7,8 @@ class CowAssemblyModel(db.Model):
     __tablename__ = 'cow'
 
     id = db.Column(db.Integer,primary_key=True)
+    # milk_baby = db.relationship('MilkingProcessModel', order_by='MilkingProcessModel.id', cascade="all, delete-orphan")
+    milk_baby = db.relationship("MilkingProcessModel")
     moo_name = db.Column(db.String(255))
     breed = db.Column(db.String(255))
     age = db.Column(db.Integer)
@@ -35,8 +37,14 @@ class CowAssemblyModel(db.Model):
     # get a cow by id
     @staticmethod
     def get_by_id(id):
+        # import pdb; pdb.set_trace()
         cow = CowAssemblyModel.query.filter_by(id=id).first()
         return cow
+
+    # get the cow_id
+    # @staticmethod
+    # def get_cow_id(cow_id):
+    #     return CowAssemblyModel.query.filter_by(id=cow_id).first()
 
     # delete a days milk entry
     def delete_cow(self):
@@ -50,5 +58,5 @@ class CowAssemblyModel(db.Model):
 
   # object instance of the model everytime its queried
     def __repr__(self):
-        return '<CowAssemblyModel {}>'.format(self.name)
+        return '<CowAssemblyModel {}>'.format(self.moo_name)
 
