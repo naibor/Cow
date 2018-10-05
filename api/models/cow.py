@@ -30,7 +30,7 @@ class MooModel():
     # get all the cows
     @staticmethod
     def let_the_cows_out():
-        cows =  CowAssemblyModel.get_entries()
+        cows =  CowAssemblyModel.get_cows()
 
         cows_list = []
         if cows:
@@ -48,3 +48,18 @@ class MooModel():
             return {"message":"No cow available yet, consider constructing one"}
 
 
+    @staticmethod
+    def get_one_cow(id):
+        cow = CowAssemblyModel.get_by_id(id)
+        # import pdb; pdb.set_trace()
+        if not cow:
+            return {"message":"The id entered is invalid"}
+        else:
+            obj = {
+            "moo_name":cow.moo_name,
+            "breed":cow.breed,
+            "age":cow.age,
+            "cow_health":cow.cow_health,
+            "time":cow.time
+            }
+        return obj

@@ -34,4 +34,13 @@ class ConstructionProcess(Resource):
         cow = MooModel.let_the_cows_out()
         return jsonify(cow)
 
+@cow_ns.route('/<int:id>')
+class OneCow(Resource):
+    """single cow resource"""
+
+    # get a single cow
+    def get(self,id):
+        one_cow = MooModel.get_one_cow(id=id)
+        return jsonify(one_cow)
+
 

@@ -11,7 +11,7 @@ assembly_time =datetime.now()
 class Test_Cow_Construction(BaseTestCase):
     """test cow construction"""
 
-    def test_save_milk(self):
+    def test_save_cow(self):
         """test a user can create a cow"""
         cow =self.test_client.post(
             "/api/v1/cow",
@@ -27,11 +27,11 @@ class Test_Cow_Construction(BaseTestCase):
         # self.assertEqual(cow.status_code,201)
 
         # get the cows
-        get_cows = self.test_client.get("/api/v1/cow",
+        get_cow = self.test_client.get("/api/v1/cow/2",
                 headers = {"content-type":"application/json"}
             )
 
         # import pdb; pdb.set_trace()
-        self.assertEqual(get_cows.status_code,200 )
+        self.assertEqual(get_cow.status_code,200 )
 
 
