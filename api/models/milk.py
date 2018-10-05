@@ -24,7 +24,7 @@ class MilkingModel():
         MilkingProcessModel.save_entry(milk)
         return {"message":"successfully saved an entry"},201
 
-    # the associted cow
+    # the associated cow
     @staticmethod
     def get_cow_id(id):
         cow = MooModel.get_the_cow_id(id=id)
@@ -39,9 +39,9 @@ class MilkingModel():
 
     @staticmethod
     def get_milk_entries_for_particular_cow(id):
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         cow_entries = MilkingProcessModel.get_entries_by_cow(id=id)
-        milk_entries_list = []
+        this_cows_list = []
         if not cow_entries:
             return{"message":"this cow has no milk entries"}
         else:
@@ -53,14 +53,14 @@ class MilkingModel():
                 "amount":entry.amount,
                 "time":entry.time
                 }
-                milk_entries_list.append(obj)
-        return milk_entries_list
+                this_cows_list.append(obj)
+        # import pdb; pdb.set_trace()
+        return this_cows_list
 
 
     @staticmethod
     def get_milk_entries():
         entries=  MilkingProcessModel.get_entries()
-
         milk_entries_list = []
         if entries:
             for entry in entries:

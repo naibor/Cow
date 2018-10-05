@@ -4,7 +4,6 @@ from flask import request, jsonify
 from datetime import datetime
 from app.endpoints.milking import MilkingProcess
 from models.milk_model import MilkingProcessModel
-# from models.milk_model import average_milk
 from tests import BaseTestCase
 
 milking_time =datetime.now()
@@ -12,8 +11,8 @@ milking_time =datetime.now()
 class Test_Milk_Entry(BaseTestCase):
     """test milk entries"""
 
-    def test_update_milk_entries(self):
-        """test a user can get milk entries"""
+    def test_get_milk_entries_for_a_cow(self):
+        """test a user can get milk entries for a particular cow"""
         milk_entry =self.test_client.post(
             "/api/v1/cow/1/milk",
             data = json.dumps(dict(
@@ -26,11 +25,7 @@ class Test_Milk_Entry(BaseTestCase):
         # self.assertEqual(milk_entry.status_code,201)
 
         # get the entry
-        update_entry = self.test_client.put("/api/v1/cow/1/milk/1",
-                data = json.dumps(dict(
-                    amount = "90.9"
-                    # time = str(milking_time)
-                    )),
+        get_entry = self.test_client.get("/api/v1/cow/1/milk",
                 headers = {"content-type":"application/json"}
             )
-        self.assertEqual(update_entry.status_code,200 )
+        self.assertEqual(get_entry.status_code,200 )

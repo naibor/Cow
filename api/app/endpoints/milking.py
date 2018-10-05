@@ -40,7 +40,9 @@ class MilkingProcess(Resource):
         return milk_entry.save_milk_entry()
 
     def get(self,cow_id):
+        # import pdb; pdb.set_trace()
         milk_entries = MilkingModel.get_milk_entries_for_particular_cow(id=cow_id)
+        # import pdb; pdb.set_trace()
         return jsonify(milk_entries)
 
 

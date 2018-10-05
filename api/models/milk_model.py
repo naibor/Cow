@@ -42,7 +42,7 @@ class MilkingProcessModel(db.Model):
     # all entries for a specific cow
     @staticmethod
     def get_entries_by_cow(id):
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         entries = MilkingProcessModel.query.filter_by(cow_id= id).all()
         # if not entries:
             # return {"message":"the id"}
