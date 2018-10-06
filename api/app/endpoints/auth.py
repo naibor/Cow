@@ -6,6 +6,7 @@ from flask import request
 from flask_restplus import Resource
 from models.schema import Userschema, Loginschema
 from models.user import NormalUser, LogInUser
+# from models.revoked_token import RevokedTokenModel
 from app.serializer import add_user, login_user
 
 auth_ns = API.namespace('auth', description="Authentication/Authorization operations.")
@@ -49,3 +50,16 @@ class LogIn(Resource):
                     password=data["password"]
                 )
         return Login_new_user.logging_in_normal_user()
+
+
+# @auth_ns.route('/logout')
+# class Logout(Resource):
+#     """user can logout"""
+#     def post(self):
+#         jti = get_raw_jwt()['jti']
+#         try:
+#             revoked_token = RevokedTokenModel(jti = jti)
+#             revoked_token.add()
+#             return {'message': 'Access token has been revoked'}
+#         except:
+#             return {'message': 'Something went wrong'}, 500

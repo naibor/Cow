@@ -7,6 +7,7 @@
 from app import API
 from flask import request, jsonify
 from flask_restplus import Resource
+from flask_jwt_extended import jwt_required, jwt_refresh_token_required
 from models.cow import MooModel
 from models.schema import Cowschema
 cow_ns = API.namespace('cow',
@@ -14,8 +15,10 @@ cow_ns = API.namespace('cow',
                         )
 @cow_ns.route('')
 class ConstructionProcess(Resource):
-
     """cow resource"""
+
+    # user can create a cow
+    @jwt_required
     def post(self):
         cow_data = request.get_json()
         data, errors = Cowschema.load(cow_data)
@@ -30,20 +33,27 @@ class ConstructionProcess(Resource):
                 )
         return new_cow.save_cow()
 
+    # user can get all the cow
+    # @jwt_refresh_token_required
+    @jwt_required
     def get(self):
         cow = MooModel.let_the_cows_out()
         return jsonify(cow)
+
 
 @cow_ns.route('/<int:id>')
 class OneCow(Resource):
     """single cow resource"""
 
     # get a single cow
+    # @jwt_refresh_token_required
+    @jwt_required
     def get(self,id):
         one_cow = MooModel.let_one_cow_out(id=id)
         return jsonify(one_cow)
 
     # update a cow
+    @jwt_required
     def put(self,id):
         to_be_updated = request.get_json()
         data, errors = Cowschema.load(to_be_updated)
@@ -60,9 +70,7 @@ class OneCow(Resource):
             return jsonify(updated_cow)
 
     # delete a cow
+    @jwt_required
     def delete(self,id):
         the_cow = MooModel.delete_a_cow(id=id)
         return the_cow
-
-
-

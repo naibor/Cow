@@ -1,8 +1,10 @@
 from app import db
 import os
-from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
+import jwt
+from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, create_refresh_token
 from werkzeug.security import generate_password_hash
 from models.user_model import NormalUserModel, existance, correct_credentials, approve
+# from models.revoke_token import RevokedTokenModel
 class NormalUser():
     # user model class
     def __init__(self, username, email, password, confirm_password):
@@ -66,13 +68,23 @@ class LogInUser(object):
             if self.username:
                 if correct_credentials(self.password, username=self.username) == True:
                     access_token = create_access_token(identity=self.username)
+                    refresh_token = create_refresh_token(identity = self.username)
                     return {"access_token" :access_token,
+                            "refresh_token" :access_token,
                             "message":"successfully logged in"
                            }, 200
             elif self.email:
                 if correct_credentials(self.password, email=self.email) == True:
                     access_token = create_access_token(identity=self.username)
+                    refresh_token = create_refresh_token(identity = self.username)
+
                     return {"access_token" :access_token,
+                            "refresh_token" :access_token,
                             "message":"successfully logged in"
                            },200
             return {"message":"wrong credentials provided, check the username and password"},400
+
+# @jwt.token_in_blacklist_loader
+# def check_if_token_in_blacklist(decrypted_token):
+#     jti = decrypted_token['jti']
+#     return models.RevokedTokenModel.is_jti_blacklisted(jti)

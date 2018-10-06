@@ -13,13 +13,15 @@ class MilkingModel():
         self.amount = amount
         self.time = str(milking_time)
         self.cow_id = MilkingProcessModel.cow_id
+        self.user_id = MilkingProcessModel.user_id
 
 
     def save_milk_entry(self):
         milk =  MilkingProcessModel(
             self.amount,
             self.time,
-            self.cow_id
+            self.cow_id,
+            self.user_id
             )
         MilkingProcessModel.save_entry(milk)
         return {"message":"successfully saved an entry"},201
