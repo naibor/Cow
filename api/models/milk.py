@@ -42,6 +42,7 @@ class MilkingModel():
             obj = {
             "cow_id":cow.id,
             }
+            import pdb; pdb. set_trace()
             MilkingProcessModel.cow_id = obj["cow_id"]
 
     @staticmethod

@@ -34,6 +34,7 @@ class MilkingProcess(Resource):
     @jwt_required
     def post(self, cow_id):
         current_user = get_jwt_identity()
+        # import pdb; pdb. set_trace()
         milk_data = request.get_json()
         data, errors = Milkschema.load(milk_data)
         if errors:
