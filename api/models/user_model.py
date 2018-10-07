@@ -1,5 +1,7 @@
 from app import db
 from werkzeug.security import check_password_hash
+from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, create_refresh_token
+
 
 
 class NormalUserModel(db.Model):
@@ -46,14 +48,19 @@ def correct_credentials(password, username=None, email=None):
             users = NormalUserModel.query.filter_by(username=username).all()
             for user in users:
                 stored_password = user.password
-                if check_password_hash(stored_password, password):
-                    return True
+                if check_password_hash(stored_password, password) == True:
+                    user_id =user.id
+                    access_token = create_access_token(identity=user_id)
+                    return access_token
         elif email:
             user = NormalUserModel.query.filter_by(email=email).first()
             if not user:
                 return False
             stored_password = user.password
-            return check_password_hash(stored_password, password)
+            if check_password_hash(stored_password, password) == True:
+                user_id = user.id
+                access_token = create_access_token(identity=user_id)
+                return access_token
         else:
             return { "message": "username or email does not exist"}
 

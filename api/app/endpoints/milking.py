@@ -7,7 +7,7 @@
 from app import API
 from flask import request, jsonify
 from flask_restplus import Resource
-from flask_jwt_extended import jwt_required, jwt_refresh_token_required
+from flask_jwt_extended import jwt_required, jwt_refresh_token_required, get_jwt_identity
 from models.milk import MilkingModel
 from models.schema import Milkschema
 milk_ns = API.namespace('milk',
@@ -31,28 +31,26 @@ class MilkingProcess(Resource):
     """milk entries resource"""
 
     # post milk entry for a particular cow
-    # @jwt_refresh_token_required
     @jwt_required
     def post(self, cow_id):
+        current_user = get_jwt_identity()
         milk_data = request.get_json()
         data, errors = Milkschema.load(milk_data)
         if errors:
             return (errors), 400
         else:
+            MilkingModel.save_user_id(id=current_user)
             MilkingModel.get_cow_id(id=cow_id)
             milk_entry = MilkingModel(
                 data["amount"]
                 )
-            # import pdb; pdb.set_trace()
         return milk_entry.save_milk_entry()
 
     # get milk entries for a particular cow
     # @jwt_refresh_token_required
     @jwt_required
     def get(self,cow_id):
-        # import pdb; pdb.set_trace()
         milk_entries = MilkingModel.get_milk_entries_for_particular_cow(id=cow_id)
-        # import pdb; pdb.set_trace()
         return jsonify(milk_entries)
 
 
@@ -61,7 +59,6 @@ class OneMilk(Resource):
     """single milk entry resource"""
 
     # get a single milk entry
-    # @jwt_refresh_token_required
     @jwt_required
     def get(self, id, cow_id):
         milk_entry = MilkingModel.get_milk_entries_for_particular_cow(id=cow_id)

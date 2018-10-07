@@ -26,11 +26,16 @@ class MilkingModel():
         MilkingProcessModel.save_entry(milk)
         return {"message":"successfully saved an entry"},201
 
+    # the associated user
+    @staticmethod
+    def save_user_id(id):
+        MilkingProcessModel.user_id = id
+
+
     # the associated cow
     @staticmethod
     def get_cow_id(id):
         cow = MooModel.get_the_cow_id(id=id)
-        # import pdb; pdb.set_trace()
         if not cow:
             return {"message":"non existant cow"}
         else:
@@ -41,7 +46,6 @@ class MilkingModel():
 
     @staticmethod
     def get_milk_entries_for_particular_cow(id):
-        # import pdb; pdb.set_trace()
         cow_entries = MilkingProcessModel.get_entries_by_cow(id=id)
         this_cows_list = []
         if not cow_entries:
@@ -56,7 +60,6 @@ class MilkingModel():
                 "time":entry.time
                 }
                 this_cows_list.append(obj)
-        # import pdb; pdb.set_trace()
         return this_cows_list
 
 
@@ -81,7 +84,6 @@ class MilkingModel():
     @staticmethod
     def get_one_entry(id):
         entry = MilkingProcessModel.get_by_id(id)
-        # import pdb; pdb.set_trace()
         if not entry:
             return {"message":"The id entered is invalid"}
         else:
@@ -122,8 +124,6 @@ class MilkingModel():
             "time":update.time
             }
         return {"message":"you have successfully updated the milk entry"}, obj
-
-    # import pdb; pdb.set_trace()
 
 
 

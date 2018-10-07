@@ -4,9 +4,10 @@
 from app import API
 from flask import request
 from flask_restplus import Resource
+from flask_jwt_extended import jwt_required, jwt_refresh_token_required
 from models.schema import Userschema, Loginschema
 from models.user import NormalUser, LogInUser
-# from models.revoked_token import RevokedTokenModel
+from models.revoke import RevokeToken
 from app.serializer import add_user, login_user
 
 auth_ns = API.namespace('auth', description="Authentication/Authorization operations.")
@@ -52,14 +53,16 @@ class LogIn(Resource):
         return Login_new_user.logging_in_normal_user()
 
 
-# @auth_ns.route('/logout')
-# class Logout(Resource):
-#     """user can logout"""
-#     def post(self):
-#         jti = get_raw_jwt()['jti']
-#         try:
-#             revoked_token = RevokedTokenModel(jti = jti)
-#             revoked_token.add()
-#             return {'message': 'Access token has been revoked'}
-#         except:
-#             return {'message': 'Something went wrong'}, 500
+@auth_ns.route('/logout')
+class Logout(Resource):
+    """user can logout"""
+    @jwt_required
+    def post(self):
+        jti = get_raw_jwt()['jti']
+        try:
+            revoked_token = RevokedTokenModel(jti = jti)
+            import pdb; pdb. set_trace()
+            revoked_token.add()
+            return {'message': 'Access token has been revoked'}
+        except:
+            return {'message': 'Something went wrong'}, 500
