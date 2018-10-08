@@ -12,8 +12,8 @@ class BaseConfig:
     """Base configuration."""
     # Flask APP configs
     JWT_SECRET_KEY = os.environ.get("SECRET_KEY", "\xe6.]`\x99\x07\x1ap\xff\xb7c\xf0\xea*\xba{")
-    # JWT_BLACKLIST_ENABLED = True
-    # JWT_BLACKLIST_TOKEN_CHECKS = ['access']
+    JWT_BLACKLIST_ENABLED = True
+    JWT_BLACKLIST_TOKEN_CHECKS = ['access']
     DEBUG = False
     # SQLAlchemy configs
     SQLALCHEMY_TRACK_MODIFICATIONS = False

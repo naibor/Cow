@@ -4,7 +4,7 @@
 from app import API
 from flask import request
 from flask_restplus import Resource
-from flask_jwt_extended import jwt_required, jwt_refresh_token_required
+from flask_jwt_extended import jwt_required, jwt_refresh_token_required, get_raw_jwt
 from models.schema import Userschema, Loginschema
 from models.user import NormalUser, LogInUser
 from models.revoke import RevokeToken
