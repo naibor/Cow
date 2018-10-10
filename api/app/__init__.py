@@ -19,7 +19,7 @@ APP.config.from_object(app_config[config_name])
 # APP.config['PROPAGATE_EXCEPTIONS'] = True
 jwt_manager = JWTManager(APP)
 
-# jwt_manager._set_error_handler_callbacks(Application)
+jwt_manager._set_error_handler_callbacks(APP)
 
 # overide 404 error handler
 @APP.errorhandler(404)
