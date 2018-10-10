@@ -17,7 +17,6 @@ class NormalUser():
         # approved users have privilages over non approved users
 
     # save user # users are saved awaiting approval
-    # @classmethod
     def save_user(self):
         if existance(self.email):
             # check if user exists
@@ -76,8 +75,3 @@ class LogInUser(object):
                         "message":"successfully logged in"
                         },200
             return {"message":"wrong credentials provided, check the username and password"},400
-
-# @jwt.token_in_blacklist_loader
-# def check_if_token_in_blacklist(decrypted_token):
-#     jti = decrypted_token['jti']
-#     return models.RevokedTokenModel.is_jti_blacklisted(jti)

@@ -4,7 +4,7 @@
 from app import API
 from flask import request
 from flask_restplus import Resource
-from flask_jwt_extended import jwt_required, jwt_refresh_token_required, get_raw_jwt
+from flask_jwt_extended import jwt_required, jwt_refresh_token_required, get_raw_jwt, get_jwt_identity
 from models.schema import Userschema, Loginschema
 from models.user import NormalUser, LogInUser
 from models.revoke import RevokeToken
@@ -58,11 +58,16 @@ class Logout(Resource):
     """user can logout"""
     @jwt_required
     def post(self):
+        # current_user = get_jwt_identity()
+        import pdb; pdb. set_trace()
         jti = get_raw_jwt()['jti']
-        try:
-            revoked_token = RevokedTokenModel(jti = jti)
-            import pdb; pdb. set_trace()
-            revoked_token.add()
-            return {'message': 'Access token has been revoked'}
-        except:
-            return {'message': 'Something went wrong'}, 500
+        user_id = get_raw_jwt()['identity']
+        # import pdb; pdb. set_trace()
+        revoked_token = RevokeToken(
+            jti = jti,
+            user_id = user_id
+            )
+        # import pdb; pdb. set_trace()
+        revoked_token.check_if_token_in_blacklist()
+        revoked_token.save()
+        return {'message': 'Access token already revoked'}
