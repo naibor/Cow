@@ -4,27 +4,24 @@ from flask import Flask, make_response, jsonify, redirect
 from flask_jwt_extended import JWTManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-# from flask_restplus import Api
 # local import
 from config import app_config
-
 # initialize sql-alchemy
 db = SQLAlchemy()
-
-
 # Get the instance config to use
 config_name = os.environ.get("APP_CONFIG", "development")
 APP = Flask(__name__, instance_relative_config=True)
-# APP = Flask('api', instance_relative_config=True)
-
 APP.config.from_object(app_config[config_name])
-APP.config['PROPAGATE_EXCEPTIONS'] = True
+# enable blacklisting of tokens in configuration
+# APP.config['JWT_BLACKLIST_ENABLED'] = True
+# APP.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access']
+
+# APP.config['PROPAGATE_EXCEPTIONS'] = True
 jwt_manager = JWTManager(APP)
-# Application =Api(APP)
-# jwt_manager._set_error_handler_callbacks(Application)
+
+jwt_manager._set_error_handler_callbacks(APP)
 
 # overide 404 error handler
-
 @APP.errorhandler(404)
 def resource_not_found(error):
     """

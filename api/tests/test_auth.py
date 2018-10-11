@@ -19,6 +19,9 @@ class Test_SignUp(BaseTestCase):
                 )),
             headers = {"content-type":"application/json"}
             )
+        signup_data = json.loads(signup.data.decode())
+        message = signup_data["message"]
+        self.assertEqual(message,"successfully signed up")
         self.assertEqual(signup.status_code,201)
 
     def test_user_login(self):
@@ -41,7 +44,12 @@ class Test_SignUp(BaseTestCase):
                 password = "A123456789a!")),
             headers = {"content-type":"application/json"}
             )
+
+        login_data = json.loads(login.data.decode())
+        token = login_data["access_token"]
+        message = login_data["message"]
         self.assertEqual(login.status_code,200)
+        self.assertEqual(message,"successfully logged in")
 
     # def test_admin_can_approve_user(self):
     #     """test approve user by super admin"""
