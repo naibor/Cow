@@ -14,6 +14,7 @@ class NormalUserModel(db.Model):
     username = db.Column(db.String(255))
     email = db.Column(db.String(255))
     user_milking = db.relationship("MilkingProcessModel")
+    user_revoke = db.relationship("RevokedTokenModel")
     password = db.Column(db.String(255))
     approved = db.Column(db.Boolean(False))
     admin = db.Column(db.Boolean())

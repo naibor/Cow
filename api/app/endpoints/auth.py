@@ -30,6 +30,7 @@ class SignUp(Resource):
                 )
         return new_user.save_user()
 
+
 @auth_ns.route('/login')
 class LogIn(Resource):
     """A user can login"""
@@ -58,16 +59,11 @@ class Logout(Resource):
     """user can logout"""
     @jwt_required
     def post(self):
-        # current_user = get_jwt_identity()
-        import pdb; pdb. set_trace()
         jti = get_raw_jwt()['jti']
         user_id = get_raw_jwt()['identity']
-        # import pdb; pdb. set_trace()
         revoked_token = RevokeToken(
             jti = jti,
             user_id = user_id
             )
-        # import pdb; pdb. set_trace()
-        revoked_token.check_if_token_in_blacklist()
         revoked_token.save()
         return {'message': 'Access token already revoked'}

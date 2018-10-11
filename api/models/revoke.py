@@ -9,14 +9,13 @@ class RevokeToken():
 
 
     @jwt_manager.token_in_blacklist_loader
-    def check_if_token_in_blacklist(access_token):
-        jti = access_token['jti']
-        # import pdb; pdb. set_trace()
+    def check_if_token_in_blacklist(decrypted_token):
+        jti = decrypted_token['jti']
         return RevokedTokenModel.is_jti_blacklisted(jti)
 
-    @staticmethod
-    def save():
+    def save(self):
+        new = RevokedTokenModel(
+            self.jti,
+            self.user_id
+            )
         RevokedTokenModel.add(new)
-
-    # @staticmethod
-# def save_user_id(current_user):
