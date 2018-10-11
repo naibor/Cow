@@ -1,8 +1,10 @@
 from app import db
 import os
-from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
+import jwt
+from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, create_refresh_token
 from werkzeug.security import generate_password_hash
 from models.user_model import NormalUserModel, existance, correct_credentials, approve
+# from models.revoke_token import RevokedTokenModel
 class NormalUser():
     # user model class
     def __init__(self, username, email, password, confirm_password):
@@ -15,7 +17,6 @@ class NormalUser():
         # approved users have privilages over non approved users
 
     # save user # users are saved awaiting approval
-    # @classmethod
     def save_user(self):
         if existance(self.email):
             # check if user exists
@@ -64,15 +65,13 @@ class LogInUser(object):
     def logging_in_normal_user(self):
 
             if self.username:
-                if correct_credentials(self.password, username=self.username) == True:
-                    access_token = create_access_token(identity=self.username)
-                    return {"access_token" :access_token,
-                            "message":"successfully logged in"
-                           }, 200
+                access_token = correct_credentials(self.password, username=self.username)
+                return {"access_token" :access_token,
+                        "message":"successfully logged in"
+                        }, 200
             elif self.email:
-                if correct_credentials(self.password, email=self.email) == True:
-                    access_token = create_access_token(identity=self.username)
-                    return {"access_token" :access_token,
-                            "message":"successfully logged in"
-                           },200
+                access_token = correct_credentials(self.password, email=self.email)
+                return {"access_token" :access_token,
+                        "message":"successfully logged in"
+                        },200
             return {"message":"wrong credentials provided, check the username and password"},400

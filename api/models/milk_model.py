@@ -10,18 +10,17 @@ class MilkingProcessModel(db.Model):
 
     id = db.Column(db.Integer,primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    users = db.relationship("NormalUserModel", backref=("users"))
     cow_id = db.Column(db.Integer, db.ForeignKey('cow.id'))
     amount = db.Column(db.Float)
     time = db.Column(db.DateTime)
-    # average = db.Column(db.Float)
 
-    def __init__(self, amount, time, cow_id ): #average
+
+    def __init__(self, amount, time, cow_id, user_id ): #average
         """initilize the db table"""
         self.amount = amount
         self.time = time
         self.cow_id = cow_id
-        # self.average = average
+        self.user_id = user_id
 
     # save a milk entry
     def save_entry(self):
@@ -30,7 +29,10 @@ class MilkingProcessModel(db.Model):
 
 
     @staticmethod
-    def save_cow_id(cow_id):
+    def get_users_name(user_id):
+        this_user = NormalUserModel.query.filter_by(id=user_id).first()
+        return this_user
+
         pass
 
 
@@ -44,8 +46,6 @@ class MilkingProcessModel(db.Model):
     def get_entries_by_cow(id):
         # import pdb; pdb.set_trace()
         entries = MilkingProcessModel.query.filter_by(cow_id= id).all()
-        # if not entries:
-            # return {"message":"the id"}
         return entries
 
     # get an entry by id
