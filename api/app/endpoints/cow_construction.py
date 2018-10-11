@@ -5,9 +5,10 @@
 # api/v1/cow/<id> GET
 # api/v1/cow/<id> PUT
 from app import API
+import json
 from flask import request, jsonify
 from flask_restplus import Resource
-from flask_jwt_extended import jwt_required, jwt_refresh_token_required
+from flask_jwt_extended import jwt_required, jwt_refresh_token_required, get_raw_jwt
 from models.cow import MooModel
 from models.schema import Cowschema
 cow_ns = API.namespace('cow',
@@ -20,7 +21,9 @@ class ConstructionProcess(Resource):
     # user can create a cow
     @jwt_required
     def post(self):
+        # access_token = get_raw_jwt()
         cow_data = request.get_json()
+        # import pdb; pdb. set_trace()
         data, errors = Cowschema.load(cow_data)
         if errors:
             return (errors), 400

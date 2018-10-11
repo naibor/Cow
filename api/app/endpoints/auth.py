@@ -66,4 +66,4 @@ class Logout(Resource):
             user_id = user_id
             )
         revoked_token.save()
-        return {'message': 'Access token already revoked'}
+        return {'message': 'Successfully logged out '}
