@@ -10,8 +10,6 @@ from flask_restplus import Resource
 from flask_jwt_extended import jwt_required, jwt_refresh_token_required, get_jwt_identity
 from models.milk import MilkingModel
 from models.schema import Milkschema
-from app.serializer import milking
-
 milk_ns = API.namespace('milk',
                         description="Milk entry/milk entry operations.",
                         path='/cow/<int:cow_id>/milk')
@@ -33,7 +31,6 @@ class MilkingProcess(Resource):
     """milk entries resource"""
 
     # post milk entry for a particular cow
-    @API.expect(milking)
     @jwt_required
     def post(self, cow_id):
         current_user = get_jwt_identity()
