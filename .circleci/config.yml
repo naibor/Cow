@@ -33,6 +33,15 @@ setup_test_database: &test_db_setup
       python api/manage.py db migrate
       python api/manage.py db upgrade
 
+setup_test_database: &test_db_setup
+  run:
+    name: Setting up test database
+    command: |
+      . venv/bin/activate
+      python api/manage.py db init
+      python api/manage.py db migrate
+      python api/manage.py db upgrade
+
 jobs:
   build:
     <<: *setup
