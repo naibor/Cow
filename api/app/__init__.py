@@ -16,8 +16,9 @@ APP.config.from_object(app_config[config_name])
 # APP.config['JWT_BLACKLIST_ENABLED'] = True
 # APP.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access']
 
-# APP.config['PROPAGATE_EXCEPTIONS'] = True
+APP.config['PROPAGATE_EXCEPTIONS'] = True
 jwt_manager = JWTManager(APP)
+jwt_manager.init_app(APP)
 
 jwt_manager._set_error_handler_callbacks(APP)
 
