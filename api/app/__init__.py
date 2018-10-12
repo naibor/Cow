@@ -33,7 +33,7 @@ def resource_not_found(error):
     )
     return make_response(jsonify(response_payload), 404)
 
-@APP.route('/', methods=['GET'])-
+@APP.route('/', methods=['GET'])
 def redirect_to_docs():
     """
     Redirects root to API docs
