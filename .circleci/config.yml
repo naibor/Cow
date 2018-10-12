@@ -24,6 +24,14 @@ run_tests: &run_tests
     command: |
       . venv/bin/activate
       pytest --cov=api/app api/tests
+setup_test_database: &test_db_setup
+  run:
+    name: Setting up test database
+    command: |
+      . venv/bin/activate
+      python api/manage.py db init
+      python api/manage.py db migrate
+      python api/manage.py db upgrade
 
 setup_test_database: &test_db_setup
   run:
