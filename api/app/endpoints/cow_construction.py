@@ -11,14 +11,18 @@ from flask_restplus import Resource
 from flask_jwt_extended import jwt_required, jwt_refresh_token_required, get_raw_jwt
 from models.cow import MooModel
 from models.schema import Cowschema
+from app.serializer import construct_cow
+
 cow_ns = API.namespace('cow',
                         description="Cow construction/cow construction operations."
                         )
+
 @cow_ns.route('')
 class ConstructionProcess(Resource):
     """cow resource"""
 
     # user can create a cow
+    @API.expect(construct_cow)
     @jwt_required
     def post(self):
         # access_token = get_raw_jwt()

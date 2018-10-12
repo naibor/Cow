@@ -12,11 +12,12 @@ db = SQLAlchemy()
 config_name = os.environ.get("APP_CONFIG", "development")
 APP = Flask(__name__, instance_relative_config=True)
 APP.config.from_object(app_config[config_name])
+
+
 APP.config['PROPAGATE_EXCEPTIONS'] = True
 jwt_manager = JWTManager()
+jwt_manager = JWTManager(APP)
 jwt_manager.init_app(APP)
-# Application =Api(APP)
-# jwt_manager._set_error_handler_callbacks(Application)
 
 
 jwt_manager._set_error_handler_callbacks(APP)
