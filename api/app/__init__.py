@@ -12,8 +12,8 @@ db = SQLAlchemy()
 config_name = os.environ.get("APP_CONFIG", "development")
 APP = Flask(__name__, instance_relative_config=True)
 APP.config.from_object(app_config[config_name])
-
 APP.config['PROPAGATE_EXCEPTIONS'] = True
+
 jwt_manager = JWTManager()
 jwt_manager.init_app(APP)
 jwt_manager = JWTManager(APP)
@@ -33,7 +33,7 @@ def resource_not_found(error):
     )
     return make_response(jsonify(response_payload), 404)
 
-@APP.route('/', methods=['GET'])
+@APP.route('/', methods=['GET'])-
 def redirect_to_docs():
     """
     Redirects root to API docs
