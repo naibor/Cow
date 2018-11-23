@@ -19,11 +19,10 @@ class ConstructionProcess(Resource):
     """cow resource"""
 
     # user can create a cow
+    # @API.expect(construct_cow)
     @jwt_required
     def post(self):
-        # access_token = get_raw_jwt()
         cow_data = request.get_json()
-        # import pdb; pdb. set_trace()
         data, errors = Cowschema.load(cow_data)
         if errors:
             return (errors), 400

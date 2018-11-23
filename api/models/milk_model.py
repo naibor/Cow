@@ -1,7 +1,9 @@
 from app import db
+from datetime import datetime
 from models.user_model import NormalUserModel
 from models.cow_model import CowAssemblyModel
 
+today = datetime.now().date()
 
 
 class MilkingProcessModel(db.Model):
@@ -13,14 +15,16 @@ class MilkingProcessModel(db.Model):
     cow_id = db.Column(db.Integer, db.ForeignKey('cow.id'))
     amount = db.Column(db.Float)
     time = db.Column(db.DateTime)
+    total = db.Column(db.Float)
 
 
-    def __init__(self, amount, time, cow_id, user_id ): #average
+    def __init__(self, amount, time, cow_id, user_id,total ): #average
         """initilize the db table"""
         self.amount = amount
         self.time = time
         self.cow_id = cow_id
         self.user_id = user_id
+        elf.total = total
 
     # save a milk entry
     def save_entry(self):
@@ -33,8 +37,6 @@ class MilkingProcessModel(db.Model):
         this_user = NormalUserModel.query.filter_by(id=user_id).first()
         return this_user
 
-        pass
-
 
     # get all milk entries(view)
     @staticmethod
@@ -46,6 +48,7 @@ class MilkingProcessModel(db.Model):
     def get_entries_by_cow(id):
         # import pdb; pdb.set_trace()
         entries = MilkingProcessModel.query.filter_by(cow_id= id).all()
+
         return entries
 
     # get an entry by id
@@ -53,6 +56,12 @@ class MilkingProcessModel(db.Model):
     def get_by_id(id):
         entry = MilkingProcessModel.query.filter_by(id=id).first()
         return entry
+
+    # get milk entries for a single day
+    @staticmethod
+    def day_entry():
+        entries = MilkingProcessModel.query.filter_by(today).all()
+        import pdb; pdb. set_trace()
 
     # delete a days milk entry
     def delete_entry(self):

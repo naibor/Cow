@@ -62,7 +62,7 @@ class Cow(Schema):
     """cow construction schema"""
     moo_name = fields.Str(validate=validate_username, required=True)
     breed = fields.Str(validate=validate_username, required=True)
-    age = fields.Int(required=True)
+    age = fields.Float(required=True)
     cow_health = fields.Str(required=True)
     time = fields.DateTime(required=False)
 Cowschema = Cow()

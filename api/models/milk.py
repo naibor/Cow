@@ -14,7 +14,7 @@ class MilkingModel():
         self.time = str(milking_time)
         self.cow_id = MilkingProcessModel.cow_id
         self.user_id = MilkingProcessModel.user_id
-
+        self.total = calculate_total()
 
     def save_milk_entry(self):
         milk =  MilkingProcessModel(
@@ -42,7 +42,7 @@ class MilkingModel():
             obj = {
             "cow_id":cow.id,
             }
-            import pdb; pdb. set_trace()
+
             MilkingProcessModel.cow_id = obj["cow_id"]
 
     @staticmethod
@@ -127,4 +127,21 @@ class MilkingModel():
         return {"message":"you have successfully updated the milk entry"}, obj
 
 
+    # get total for a day's entry
+    @staticmethod
+    def calculate_total():
+        todays_milk = MilkingProcessModel.day_entry()
+        # this should return a list of the day's entry
+        if len(todays_milk) == 0:
+            total = 0
+        else:
+            # add entries in the list
+             total = sum(todays_milk)
+            # the total in the database becomes the total got
+        return total
+        # or
+        # total =0
+        # for item in todays_milk:
+            # total+= item
+        # return total
 
